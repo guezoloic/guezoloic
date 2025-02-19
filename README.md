@@ -16,7 +16,9 @@ I also enjoy working on various projects and constantly learning new technologie
 ![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white) 
 ![Assembly](https://img.shields.io/badge/Assembly-525252?style=for-the-badge&logo=windows-terminal&logoColor=white) 
+![macOS](https://img.shields.io/badge/macOS-000000?style=for-the-badge&logo=apple&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+
 
 ## 📈 Stats  
 
@@ -30,3 +32,5 @@ I also enjoy working on various projects and constantly learning new technologie
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/guezoloic) 
 [![LeetCode](https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black)](https://leetcode.com/guezoloic)  
+
+**🚀 I'm open to any project or collaboration. Feel free to reach me out to me on  LinkedIn!**

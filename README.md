@@ -36,6 +36,7 @@ whether in **cybersecurity, front-end/back-end development, machine learning, or
 ## 🌍 External Links
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/guezoloic) 
-[![LeetCode](https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black)](https://leetcode.com/guezoloic)  
+[![LeetCode](https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black)](https://leetcode.com/guezoloic)
+[![Hugging Face](https://img.shields.io/badge/HuggingFace-FF6B00?style=for-the-badge&logo=huggingface&logoColor=white)](https://huggingface.co/guezoloic)
 
 **🚀 I'm open to any project or collaboration. Feel free to reach out to me on LinkedIn!**

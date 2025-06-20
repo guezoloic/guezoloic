@@ -54,4 +54,6 @@ whether in **cybersecurity, front-end/back-end development, machine learning, or
   </a>
 </div>
 
+---
+
 **🚀 I'm open to any project or collaboration. Feel free to reach out to me on LinkedIn!**

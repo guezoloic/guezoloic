@@ -36,7 +36,7 @@ whether in **cybersecurity, front-end/back-end development, machine learning, or
 </p>
 
 ## 🌍 External Links
-<div style="display: flex; gap: 5px; flex-wrap: wrap;">
+<div style="display: flex; gap: 8px; flex-wrap: wrap;">
   <a href="https://guezoloic.com" target="_blank" rel="noopener">
     <img src="https://custom-icon-badges.demolab.com/badge/guezoloic-0078D7?logo=globe&logoColor=white" alt="Website" style="height: 30px;" />
   </a>

@@ -17,13 +17,15 @@ I'm also always eager to take on new challenges and explore different technologi
 whether in **cybersecurity, front-end/back-end development, machine learning, or other fields**
 
 ## 🔧 Technologies & Tools 
-![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white) 
-![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white) 
-![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) 
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white) 
-![Assembly](https://img.shields.io/badge/Assembly-525252?style=for-the-badge&logo=windows-terminal&logoColor=white) 
-![macOS](https://img.shields.io/badge/macOS-000000?style=for-the-badge&logo=apple&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+<div style="display: flex; gap: 8px; flex-wrap: wrap;">
+  <img src="https://custom-icon-badges.demolab.com/badge/C-00599C?logo=c&logoColor=white" alt="C" style="height: 30px;" />
+  <img src="https://custom-icon-badges.demolab.com/badge/Rust-000000?logo=rust&logoColor=white" alt="Rust" style="height: 30px;" />
+  <img src="https://custom-icon-badges.demolab.com/badge/Python-3670A0?logo=python&logoColor=ffdd54" alt="Python" style="height: 30px;" />
+  <img src="https://custom-icon-badges.demolab.com/badge/Java-ED8B00?logo=openjdk&logoColor=white" alt="Java" style="height: 30px;" />
+  <img src="https://custom-icon-badges.demolab.com/badge/Assembly-525252?logo=terminal&logoColor=white" alt="Assembly" style="height: 30px;" />
+  <img src="https://custom-icon-badges.demolab.com/badge/macOS-000000?logo=apple&logoColor=white" alt="macOS" style="height: 30px;" />
+  <img src="https://custom-icon-badges.demolab.com/badge/Linux-FCC624?logo=linux&logoColor=black" alt="Linux" style="height: 30px;" />
+</div>
 
 
 ## 📈 Stats  
@@ -34,9 +36,22 @@ whether in **cybersecurity, front-end/back-end development, machine learning, or
 </p>
 
 ## 🌍 External Links
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/guezoloic) 
-[![LeetCode](https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black)](https://leetcode.com/guezoloic)
-[![Hugging Face](https://img.shields.io/badge/HuggingFace-FF6B00?style=for-the-badge&logo=huggingface&logoColor=white)](https://huggingface.co/guezoloic)
+<div style="display: flex; gap: 5px; flex-wrap: wrap;">
+  <a href="https://guezoloic.com" target="_blank" rel="noopener">
+    <img src="https://custom-icon-badges.demolab.com/badge/guezoloic-0078D7?logo=globe&logoColor=white" alt="Website" style="height: 30px;" />
+  </a>
+  <a href="https://www.linkedin.com/in/guezoloic" target="_blank" rel="noopener">
+    <img src="https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff" alt="LinkedIn" style="height: 30px;" />
+  </a>
+  <a href="https://leetcode.com/guezoloic" target="_blank" rel="noopener">
+    <img src="https://custom-icon-badges.demolab.com/badge/LeetCode-FFA116?logo=leetcode&logoColor=000" alt="LeetCode" style="height: 30px;" />
+  </a>
+  <a href="https://huggingface.co/guezoloic" target="_blank" rel="noopener">
+    <img src="https://img.shields.io/badge/HuggingFace-FF6B00?style=flat-square&logo=huggingface&logoColor=white" alt="Hugging Face" style="height: 30px;" />
+  </a>
+  <a href="https://github.com/guezoloic" target="_blank" rel="noopener">
+    <img src="https://custom-icon-badges.demolab.com/badge/GitHub-121011?logo=github&logoColor=fff" alt="GitHub" style="height: 30px;" />
+  </a>
+</div>
 
 **🚀 I'm open to any project or collaboration. Feel free to reach out to me on LinkedIn!**

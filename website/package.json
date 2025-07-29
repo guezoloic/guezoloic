@@ -1,0 +1,29 @@
+{
+  "name": "guezoloic",
+  "version": "1.0.0",
+  "description": "I am **GUEZO Loïc**, a French student passionate about IT and electronics.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guezoloic/guezoloic.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/guezoloic/guezoloic/issues"
+  },
+  "homepage": "https://github.com/guezoloic/guezoloic#readme",
+  "devDependencies": {
+    "vite": "^6.3.4"
+  },
+  "dependencies": {
+    "three": "^0.178.0"
+  }
+}

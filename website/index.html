@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <title>Loïc GUEZO | Portfolio</title>
+    <title>Loïc GUEZO</title>
     <meta name="description" content="Portfolio of Loïc GUEZO, a French student aiming to become an Embedded Systems developer. Experience in AI, Game Development, and Embedded Systems.">
     <meta name="keywords" content="Loïc GUEZO, Embedded Systems developer, electronics, IoT, microcontrollers, game development, programming, France">
     <meta name="author" content="Loïc GUEZO">
@@ -13,7 +13,7 @@
     <meta name="language" content="en-US">
     <meta name="geo.region" content="FR">
     <meta name="geo.placename" content="France">
-    
+
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Loïc GUEZO Portfolio">
     <meta property="og:title" content="Loïc GUEZO | Portfolio">
@@ -35,7 +35,6 @@
 
     <link rel="canonical" href="https://guezoloic.com">
 
-    <!-- Favicons & Icons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -45,8 +44,8 @@
 
     <link rel="manifest" href="/site.webmanifest">
 
-    <meta name="theme-color" content="#4f46e5">
-    <meta name="msapplication-TileColor" content="#4f46e5">
+    <meta name="theme-color" content="#111827">
+    <meta name="msapplication-TileColor" content="#111827">
     <meta name="msapplication-config" content="/browserconfig.xml">
     <meta name="application-name" content="Loïc GUEZO Portfolio">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -97,7 +96,12 @@
     <link rel="preload" href="/src/main.tsx" as="script">
     <link rel="modulepreload" href="/src/main.tsx">
 </head>
-<body>
+<body class="relative min-h-screen bg-gradient-to-br from-gray-900 via-green-900 to-gray-900">
+    <div 
+        ref={mountRef} 
+        className="fixed top-0 left-0 w-full h-full pointer-events-none z-10"
+      />
+    <div style="height: 10000px;">e</div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 </body>

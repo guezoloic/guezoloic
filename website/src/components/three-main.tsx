@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 const Three = () => {
   const mountRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!mountRef.current) return;
@@ -27,11 +28,21 @@ const Three = () => {
     const light = new THREE.DirectionalLight(0xffffff, 2);
     light.position.set(5, 5, 5);
     scene.add(light);
+    
+    const loadingManager = new THREE.LoadingManager(
+      () => setLoading(false),
+      (item, loaded, total) => {
+        console.log(`Loaded ${loaded} of ${total} files: ${item}`);
+      },
+      (url) => console.error(`Erreur de chargement : ${url}`)
+    );
 
     const loader = new GLTFLoader();
     let model: THREE.Object3D | null = null;
     let mixer: THREE.AnimationMixer | null = null;
     const clock = new THREE.Clock();
+
+    loader.manager = loadingManager;
 
     loader.load(
       "/models/mixamo_test.glb",
@@ -51,6 +62,12 @@ const Three = () => {
         model.position.y -= size.y * 0.3;
 
         scene.add(model);
+
+        if (gltf.animations.length > 0) {
+          const mixer = new THREE.AnimationMixer(model);
+          const action = mixer.clipAction(gltf.animations[0]);
+          action.play();
+        }
         
         mixer = new THREE.AnimationMixer(model);
         if (gltf.animations.length > 0) {
@@ -93,10 +110,15 @@ const Three = () => {
   }, []);
 
   return (
-    <div 
-      ref={mountRef} 
-      className="fixed top-0 left-0 w-full h-full pointer-events-auto z-10"
-    />
+    <div className="fixed w-full h-full  z-20">
+      <div 
+        ref={mountRef} 
+        className="top-0 left-0 w-full h-full pointer-events-none"
+      />
+      {loading && (<div className="absolute top-1/2 left-1/2 w-16 h-16 -translate-x-1/2 -translate-y-1/2 
+                      border-4 border-white border-t-transparent rounded-full animate-spin">
+      </div>)}
+    </div>
   );
 };
 

@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
 
 const Three = () => {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -21,7 +23,10 @@ const Three = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     mountRef.current.appendChild(renderer.domElement);
 
-    const light = new THREE.DirectionalLight(0xffffff, 1);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 2);
+    scene.add(ambientLight);
+
+    const light = new THREE.DirectionalLight(0xffffff, 2);
     light.position.set(5, 5, 5);
     scene.add(light);
 
@@ -32,17 +37,23 @@ const Three = () => {
       "/models/mixamo_test.glb",
       (gltf) => {
         model = gltf.scene;
-        model.scale.set(10, 10, 10);
-        model.position.set(0, -10, -10);
+        model.scale.set(1, 1, 1);
+        model.position.set(0, 0, 0);
         scene.add(model);
       },
       undefined,
       (error) => {
-        console.error("Erreur de chargement du modèle :", error);
+        console.error("Error while loading file:", error);
       }
     );
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+
     const animate = () => {
       requestAnimationFrame(animate);
+      controls.update();
       renderer.render(scene, camera);
     };
     animate();
@@ -64,7 +75,7 @@ const Three = () => {
   return (
     <div 
       ref={mountRef} 
-      className="fixed top-0 left-0 w-full h-full pointer-events-none z-10"
+      className="fixed top-0 left-0 w-full h-full pointer-events-auto z-10"
     />
   );
 };

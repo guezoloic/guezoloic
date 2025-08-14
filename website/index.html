@@ -44,8 +44,8 @@
 
     <link rel="manifest" href="/site.webmanifest">
 
-    <meta name="theme-color" content="#111827">
-    <meta name="msapplication-TileColor" content="#111827">
+    <meta name="theme-color" content="#1e3d2e">
+    <meta name="msapplication-TileColor" content="#1e3d2e">
     <meta name="msapplication-config" content="/browserconfig.xml">
     <meta name="application-name" content="Loïc GUEZO Portfolio">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -92,16 +92,11 @@
     }
     </script>
 
-    <link href="/src/style.css" rel="stylesheet">
+    <link href="/src/styles/style.css" rel="stylesheet">
     <link rel="preload" href="/src/main.tsx" as="script">
     <link rel="modulepreload" href="/src/main.tsx">
 </head>
-<body class="relative min-h-screen bg-gradient-to-br from-gray-900 via-green-900 to-gray-900">
-    <div 
-        ref={mountRef} 
-        className="fixed top-0 left-0 w-full h-full pointer-events-none z-10"
-      />
-    <div style="height: 10000px;">e</div>
+<body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 </body>

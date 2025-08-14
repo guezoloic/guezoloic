@@ -1,6 +1,8 @@
+import Three from "./components/three-main";
+
 function App() {
   return (
-    <div></div>
+    <Three />
   );
 }
 

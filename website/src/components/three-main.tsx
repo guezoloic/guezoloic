@@ -1,8 +1,6 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-
 
 const Three = () => {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -32,14 +30,39 @@ const Three = () => {
 
     const loader = new GLTFLoader();
     let model: THREE.Object3D | null = null;
+    let mixer: THREE.AnimationMixer | null = null;
+    const clock = new THREE.Clock();
 
     loader.load(
       "/models/mixamo_test.glb",
       (gltf) => {
         model = gltf.scene;
-        model.scale.set(1, 1, 1);
-        model.position.set(0, 0, 0);
+
+        const box = new THREE.Box3().setFromObject(model);
+        const size = new THREE.Vector3();
+        const center = new THREE.Vector3();
+        box.getSize(size);
+        box.getCenter(center);
+        
+        model.position.x -= center.x;
+        model.position.y -= center.y;
+        model.position.z -= center.z;
+
+        model.position.y -= size.y * 0.3;
+
         scene.add(model);
+        
+        mixer = new THREE.AnimationMixer(model);
+        if (gltf.animations.length > 0) {
+          const action = mixer.clipAction(gltf.animations[0]);
+          action.play();
+        }
+
+        const fov = camera.fov * (Math.PI / 180);
+        const distance = size.y / (2 * Math.tan(fov / 2));
+        camera.position.set(0, 0, distance * 1.2);
+
+        camera.lookAt(0, 0, 0);
       },
       undefined,
       (error) => {
@@ -47,13 +70,10 @@ const Three = () => {
       }
     );
 
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
-
     const animate = () => {
       requestAnimationFrame(animate);
-      controls.update();
+      const delta = clock.getDelta();
+      if (mixer) mixer.update(delta);
       renderer.render(scene, camera);
     };
     animate();

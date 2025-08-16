@@ -111,8 +111,8 @@ export class Character {
                 const idleAnimation = this.actions[0];
                 idleAnimation.reset();
                 idleAnimation.setLoop(THREE.LoopRepeat, Infinity);
-                animation.crossFadeTo(idleAnimation, 0.2, true);
-                idleAnimation.fadeIn(0.2).play();
+                animation.crossFadeTo(idleAnimation, 0.5, true);
+                idleAnimation.fadeIn(0.5).play();
                 
                 this.currentAction = idleAnimation;
                 this.mixer?.removeEventListener("finished", onFinish);
@@ -133,7 +133,7 @@ export class Character {
             console.log(randomIndex);
             await this.loadAnimation(randomIndex);
             this.playAnimation(randomIndex);
-        }, 60_000);
+        }, 45_000);
     }
 
     public update(delta: number) {

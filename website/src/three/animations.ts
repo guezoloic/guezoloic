@@ -19,7 +19,7 @@ class Animations {
 
     constructor(model: THREE.Object3D) {
         this.mixer = new THREE.AnimationMixer(model);
-        this.load_animation(0);
+        this.play_animation(0);
     }
 
     private load_animation(index: number): Promise<void> {

@@ -1,4 +1,4 @@
-import Three from "./components/three-main";
+import Three from "./components/three";
 
 function App() {
   return (

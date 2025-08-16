@@ -4,6 +4,8 @@ import { GLTFLoader, GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
 const animations = [
     "animations/idle.glb",
     "animations/waving.glb",
+    "animations/swing.glb",
+    "animations/danse.glb",
 ];
 
 export class Character {
@@ -17,7 +19,9 @@ export class Character {
         this.loader = new GLTFLoader(loadingManager);
 
         this.loadModel(model_url, scene, camera)
-            .then(() => this.runAnimation(0))
+            .then(() => this.loadAnimation(0))
+            .then(() => this.runAnimation(1))
+            .then(() => this.startRandomAnimations())
             .catch(console.error);
     }
 
@@ -54,7 +58,7 @@ export class Character {
         });
     }
 
-     private async runAnimation(index: number) {
+    private async runAnimation(index: number) {
         if (!this.actions[index]) await this.loadAnimation(index);
         if (this.currentAction) this.currentAction.stop();
         this.playAnimation(index);
@@ -72,7 +76,9 @@ export class Character {
                 (gltf: GLTF) => {
                     if (!gltf.animations[0]) return reject(new Error(`${path} has no animations`));
                     if (!this.mixer) return reject(new Error("Mixer not initialized"));
-                    const action = this.mixer.clipAction(gltf.animations[0]);
+                    const clip = gltf.animations[0].clone();
+                    clip.tracks = clip.tracks.filter(track => !track.name.endsWith('.position'));
+                    const action = this.mixer.clipAction(clip);
                     this.actions[index] = action;
                     resolve();
                 },
@@ -85,29 +91,49 @@ export class Character {
     public playAnimation(index: number) {
         if (!this.actions[index]) throw new Error(`Animation index ${index} not loaded`);
         if (!this.mixer) throw new Error("Mixer not initialized");
-
+        if (this.currentAction !== this.actions[0] && index !== 1) return;
+        
         const animation = this.actions[index];
-
-        if (this.currentAction) {
-            this.currentAction.stop();
+        if (this.currentAction && this.currentAction !== animation) {
+            this.currentAction.fadeOut(0.2);
+            this.currentAction.crossFadeTo(animation, 0.8, true);
         }
-
+        this.currentAction = animation;
+        
         animation.reset();
         animation.setLoop(THREE.LoopOnce, 1);
         animation.clampWhenFinished = true;
-
-        const onFinish = (event: THREE.Event) => {
-            if ((event as any).action === animation) {
-                const idle = this.actions[0];
-                idle?.play();
-                this.currentAction = idle || null;
+        
+        animation.play();
+        
+        const onFinish = (event: any) => {
+            if (event.action === animation) {
+                const idleAnimation = this.actions[0];
+                idleAnimation.reset();
+                idleAnimation.setLoop(THREE.LoopRepeat, Infinity);
+                animation.crossFadeTo(idleAnimation, 0.2, true);
+                idleAnimation.fadeIn(0.2).play();
+                
+                this.currentAction = idleAnimation;
                 this.mixer?.removeEventListener("finished", onFinish);
             }
         };
-
+        
         this.mixer.addEventListener("finished", onFinish);
-        animation.play();
-        this.currentAction = animation;
+    }
+    
+    private startRandomAnimations() {
+        window.setInterval(async () => {
+            if (!this.mixer || !this.actions.length) return;
+
+            const minIndex = 2;
+            const maxIndex = animations.length-1;
+            
+            const randomIndex = Math.floor(Math.random() * (maxIndex - minIndex + 1)) + minIndex;
+            console.log(randomIndex);
+            await this.loadAnimation(randomIndex);
+            this.playAnimation(randomIndex);
+        }, 60_000);
     }
 
     public update(delta: number) {

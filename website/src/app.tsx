@@ -1,5 +1,5 @@
 import Navbar from "./components/Navbar";
-import Three from "./components/Three";
+import Three from "./components/three";
 import Section from "./components/Section"
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
       <Three />
 	  <Navbar/>
       <div className="relative z-10 h-screen overflow-y-scroll">
-        <Section><h2 className="text-3xl text-white">first section</h2></Section>
+        <Section><div></div></Section>
         <Section><h2 className="text-3xl text-white">second section</h2></Section>
 		<Section><h2 className="text-3xl text-white">third section</h2></Section>
       </div>

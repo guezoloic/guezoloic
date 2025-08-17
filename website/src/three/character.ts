@@ -4,8 +4,8 @@ import { GLTFLoader, GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
 const animations = [
     "animations/idle.glb",
     "animations/waving.glb",
-    "animations/swing.glb",
     "animations/danse.glb",
+    "animations/swing.glb",
 ];
 
 export class Character {
@@ -128,11 +128,9 @@ export class Character {
 
             const minIndex = 2;
             const maxIndex = animations.length-1;
-            
             const randomIndex = Math.floor(Math.random() * (maxIndex - minIndex + 1)) + minIndex;
-            console.log(randomIndex);
-            await this.loadAnimation(randomIndex);
-            this.playAnimation(randomIndex);
+
+            this.runAnimation(randomIndex);
         }, 45_000);
     }
 

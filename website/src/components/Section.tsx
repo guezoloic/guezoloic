@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Section = ({ children }) => {
+const Section = ({id, children }) => {
     return (
-        <section className="h-screen flex items-center justify-center m-5">
+        <section id={id} className="h-screen flex items-center justify-center m-5">
             {children}
         </section>
     );

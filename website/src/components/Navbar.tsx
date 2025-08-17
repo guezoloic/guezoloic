@@ -1,13 +1,16 @@
 import React from "react";
-import { HomeIcon, CodeBracketIcon, FolderIcon } from "@heroicons/react/24/solid";
 
-const Navbar: React.FC = () => {
-	const buttons = [
-		{ label: "Home", icon: HomeIcon, href: "#home" },
-		{ label: "Skills", icon: CodeBracketIcon, href: "#skills" },
-		{ label: "Projects", icon: FolderIcon, href: "#projects" },
-	];
+type Button = {
+	label: string;
+	icon: React.ElementType;
+	href: string;
+};
 
+type Buttons = {
+	buttons: Button[];
+};
+
+const Navbar = ({ buttons }: Buttons) => {
 	return (
 		<nav className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-2">
 			<div className="flex items-center justify-center backdrop-blur-lg bg-black/30 border border-white/20 rounded-3xl shadow-md px-4 h-12 md:h-14 md:px-6 max-w-max">
@@ -25,7 +28,7 @@ const Navbar: React.FC = () => {
 				{buttons.map((btn) => (
 					<a
 						key={btn.label}
-						href={btn.href}
+						href={"#" + btn.href}
 						title={btn.label}
 						className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full backdrop-blur-lg bg-black/30 shadow-md text-xl md:text-2xl text-white transition-all duration-200 ease-out
                  hover:scale-110 hover:bg-white/25

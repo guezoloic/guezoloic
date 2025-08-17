@@ -1,21 +1,16 @@
-import BottomText from "./components/Navbar";
-import FirstPage from "./components/FirstPage";
+import Navbar from "./components/Navbar";
 import Three from "./components/Three";
+import Section from "./components/Section"
 
 function App() {
   return (
-    <div className="relative w-full h-screen">
-        <Three />
-
-      {/* Contenu scrollable par-dessus */}
+    <div className="relative w-full h-screen scrollbar-hide">
+      <Three />
+	  <Navbar/>
       <div className="relative z-10 h-screen overflow-y-scroll">
-        <FirstPage />
-        <section className="h-screen flex items-center justify-center">
-          <h2 className="text-3xl text-white">second section</h2>
-        </section>
-        <section className="h-screen flex items-center justify-center">
-          <h2 className="text-3xl text-white">Thrid section</h2>
-        </section>
+        <Section><h2 className="text-3xl text-white">first section</h2></Section>
+        <Section><h2 className="text-3xl text-white">second section</h2></Section>
+		<Section><h2 className="text-3xl text-white">third section</h2></Section>
       </div>
     </div>
   );

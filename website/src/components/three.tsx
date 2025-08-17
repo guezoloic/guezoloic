@@ -11,7 +11,7 @@ const Three = () => {
     const loadingManager = new THREE.LoadingManager(
       () => setLoading(false),
       (item, loaded, total) => console.log(`Loaded ${loaded}/${total}: ${item}`),
-      (url) => console.error(`Erreur de chargement : ${url}`)
+      (url) => console.error(`Load error : ${url}`)
     );
 
     new Main(mountRef.current, loadingManager);

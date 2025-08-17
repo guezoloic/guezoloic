@@ -29,7 +29,7 @@ const Projects: React.FC = () => {
 
                 setRepos(sorted);
             } catch (err) {
-                console.error("Erreur en récupérant les repos:", err);
+                console.error("Error while loading repos", err);
             }
         };
 

@@ -4,8 +4,13 @@ import { GLTFLoader, GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
 const animations = [
     "animations/idle.glb",
     "animations/waving.glb",
-    "animations/danse.glb",
-    "animations/swing.glb",
+    "animations/StandingW_BriefcaseIdle.glb",
+    "animations/Acknowledging.glb",
+    "animations/ArmStretching.glb",
+    "animations/Defeated.glb",
+    "animations/OffensiveIdle.glb",
+    "animations/Surprised.glb",
+    "animations/ThoughtfulHeadShake.glb"
 ];
 
 export class Character {
@@ -91,7 +96,7 @@ export class Character {
     public playAnimation(index: number) {
         if (!this.actions[index]) throw new Error(`Animation index ${index} not loaded`);
         if (!this.mixer) throw new Error("Mixer not initialized");
-        if (this.currentAction !== this.actions[0] && index !== 1) return;
+        if (this.currentAction && this.currentAction !== this.actions[0]) return;
         
         const animation = this.actions[index];
         if (this.currentAction && this.currentAction !== animation) {
@@ -121,13 +126,13 @@ export class Character {
         
         this.mixer.addEventListener("finished", onFinish);
     }
-    
+
     private startRandomAnimations() {
         window.setInterval(async () => {
             if (!this.mixer || !this.actions.length) return;
 
             const minIndex = 2;
-            const maxIndex = animations.length-1;
+            const maxIndex = animations.length - 1;
             const randomIndex = Math.floor(Math.random() * (maxIndex - minIndex + 1)) + minIndex;
 
             this.runAnimation(randomIndex);

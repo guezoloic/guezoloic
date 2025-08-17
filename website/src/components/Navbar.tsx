@@ -21,7 +21,9 @@ const Navbar: React.FC<NavbarProps> = ({ buttons, onOpenAbout }) => {
 			<div className="relative">
 				<button
 					onClick={onOpenAbout}
-					className="cursor-pointer flex items-center justify-center backdrop-blur-lg bg-black/30 border border-white/20 rounded-3xl shadow-md px-4 h-12 md:h-14 md:px-6 max-w-max transition-all duration-200 hover:scale-105"
+					className="cursor-pointer flex items-center justify-center backdrop-blur-lg bg-black/30 rounded-3xl shadow-md px-4 h-12 md:h-14 md:px-6 max-w-max transition-all duration-200 hover:scale-105
+					hover:bg-white/25
+                 	active:scale-95 active:shadow-md"
 				>
 					<div className="flex flex-col items-center justify-center whitespace-nowrap">
 						<span className="text-base md:text-lg font-bold text-white drop-shadow-lg">

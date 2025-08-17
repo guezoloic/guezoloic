@@ -18,7 +18,7 @@ const Three = () => {
   }, []);
 
   return (
-    <div className="fixed w-full h-full ">
+    <div className="fixed w-full h-full inset-0 z-0">
       <div ref={mountRef} className="top-0 left-0 w-full h-full pointer-events-none" />
       {loading && (
         <div className="absolute top-1/2 left-1/2 w-16 h-16 -translate-x-1/2 -translate-y-1/2 border-4 border-white border-t-transparent rounded-full animate-spin" />

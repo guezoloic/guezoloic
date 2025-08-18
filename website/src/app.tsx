@@ -22,9 +22,9 @@ function App() {
 			<Navbar buttons={buttons} onOpenAbout={() => setAboutOpen(true)} />
       		<About open={aboutOpen} onClose={() => setAboutOpen(false)} />
 				
-			<div className="relative z-10 h-screen overflow-y-scroll">
+			<div className="relative z-10 h-screen overflow-y-scroll scroll-container">
 				<Section id={buttons[0].href} children="" />
-				<div className="backdrop-blur-sm bg-black/30 border border-white/20 rounded-3xl shadow-md">
+				<div className="border border-white/20 rounded-3xl shadow-md">
 					<Section id={buttons[1].href}><h2 className="text-3xl text-white">third section</h2></Section>
 					<Section id={buttons[2].href}><Projects /></Section>
 				</div>

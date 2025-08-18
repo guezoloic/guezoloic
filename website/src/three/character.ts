@@ -14,16 +14,16 @@ const animations = [
 ];
 
 export class Character {
-    private model: THREE.Object3D | null = null;
+    public model: THREE.Object3D | null = null;
     private mixer: THREE.AnimationMixer | null = null;
     private actions: THREE.AnimationAction[] = [];
     private currentAction: THREE.AnimationAction | null = null;
     private loader: GLTFLoader;
 
-    constructor(model_url: string, scene: THREE.Scene, camera: THREE.PerspectiveCamera, loadingManager?: THREE.LoadingManager) {
-        this.loader = new GLTFLoader(loadingManager);
+    constructor(loadingManager?: THREE.LoadingManager) {this.loader = new GLTFLoader(loadingManager);}
 
-        this.loadModel(model_url, scene, camera)
+    public async init(model_url: string, scene: THREE.Scene, camera: THREE.PerspectiveCamera) {
+        await this.loadModel(model_url, scene, camera)
             .then(() => this.loadAnimation(0))
             .then(() => this.runAnimation(1))
             .then(() => this.startRandomAnimations())

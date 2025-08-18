@@ -1,10 +1,11 @@
 import * as THREE from "three";
 import { Character } from "./character";
+import { bindScrollToScrollEffects } from "../three/scroll.ts";
 
 export class Main {
-    private scene: THREE.Scene;
-    private camera: THREE.PerspectiveCamera;
-    private renderer: THREE.WebGLRenderer;
+    public scene: THREE.Scene;
+    public camera: THREE.PerspectiveCamera;
+    public renderer: THREE.WebGLRenderer;
     private clock: THREE.Clock;
     private character: Character | null = null;
 
@@ -36,7 +37,15 @@ export class Main {
 
         this.clock = new THREE.Clock();
 
-        this.character = new Character("/models/BASEmodel.glb", this.scene, this.camera, loadingManager);
+
+        (async () => {
+            this.character = new Character(loadingManager);
+            await this.character.init("/models/BASEmodel.glb", this.scene, this.camera);
+            const scrollContainer = document.querySelector(".scroll-container");
+            if (scrollContainer && this.character.model) {
+                bindScrollToScrollEffects(scrollContainer as HTMLElement, this.camera, this.character.model, 5);
+            }
+        })();
 
         window.addEventListener("resize", this.handleResize);
 

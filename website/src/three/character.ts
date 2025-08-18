@@ -18,7 +18,7 @@ export class Character {
     private mixer: THREE.AnimationMixer | null = null;
     private actions: THREE.AnimationAction[] = [];
     private currentAction: THREE.AnimationAction | null = null;
-    private loader = new GLTFLoader();
+    private loader: GLTFLoader;
 
     constructor(model_url: string, scene: THREE.Scene, camera: THREE.PerspectiveCamera, loadingManager?: THREE.LoadingManager) {
         this.loader = new GLTFLoader(loadingManager);
@@ -96,12 +96,10 @@ export class Character {
     public playAnimation(index: number) {
         if (!this.actions[index]) throw new Error(`Animation index ${index} not loaded`);
         if (!this.mixer) throw new Error("Mixer not initialized");
-        if (this.currentAction && this.currentAction !== this.actions[0]) return;
         
         const animation = this.actions[index];
         if (this.currentAction && this.currentAction !== animation) {
-            this.currentAction.fadeOut(0.2);
-            this.currentAction.crossFadeTo(animation, 0.8, true);
+            this.currentAction.fadeOut(0.8);
         }
         this.currentAction = animation;
         
@@ -116,7 +114,6 @@ export class Character {
                 const idleAnimation = this.actions[0];
                 idleAnimation.reset();
                 idleAnimation.setLoop(THREE.LoopRepeat, Infinity);
-                animation.crossFadeTo(idleAnimation, 0.5, true);
                 idleAnimation.fadeIn(0.5).play();
                 
                 this.currentAction = idleAnimation;
@@ -136,7 +133,7 @@ export class Character {
             const randomIndex = Math.floor(Math.random() * (maxIndex - minIndex + 1)) + minIndex;
 
             this.runAnimation(randomIndex);
-        }, 45_000);
+        }, 35_000);
     }
 
     public update(delta: number) {

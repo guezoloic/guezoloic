@@ -17,7 +17,7 @@ function App() {
 	const [aboutOpen, setAboutOpen] = useState(false);
 
 	return (
-		<div className="relative w-full h-screen scrollbar-hide">
+		<div className="relative w-full h-screen">
 			<Three />
 			<Navbar buttons={buttons} onOpenAbout={() => setAboutOpen(true)} />
       		<About open={aboutOpen} onClose={() => setAboutOpen(false)} />

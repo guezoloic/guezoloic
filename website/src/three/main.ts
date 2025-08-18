@@ -36,7 +36,7 @@ export class Main {
 
         this.clock = new THREE.Clock();
 
-        this.character = new Character("/models/mixamo_test.glb", this.scene, this.camera, loadingManager);
+        this.character = new Character("/models/BASEmodel.glb", this.scene, this.camera, loadingManager);
 
         window.addEventListener("resize", this.handleResize);
 

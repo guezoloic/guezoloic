@@ -7,11 +7,25 @@ html, body {
   background-color: #1e3d2e;
 }
 
-.scrollbar-hide {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
+@layer base {
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full backdrop-blur-sm bg-white/30 transition-all duration-300;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/60 w-4 backdrop-blur-xl;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.3) transparent;
+  }
 }

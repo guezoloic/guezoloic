@@ -22,50 +22,35 @@ export default class AnimationQueue {
         this.tryPlayNext(true);
     }
 
-    private tryPlayNext(force: boolean = false) {
-        if (!this.currentAction || force) {
-            let nextAction = this.queue.shift() || this.animation.getBasicAction();
-            const isIdle = nextAction === this.animation.getBasicAction();
-
-            if (this.currentAction === this.animation.getBasicAction() && this.queue.length > 0) {
+    private async tryPlayNext(force: boolean = false) {
+        if (this.currentAction && !force) {
+            if (this.currentAction && (this.currentAction as any).isBasicClone) {
                 this.currentAction.fadeOut(this.animation.getFadeout());
-                this.currentAction.stop();
-                nextAction = this.queue.shift()!;
-            }
-
-            const isSameAction = this.currentAction === nextAction;
-
-            if (!isSameAction) {
-                if (this.currentAction && this.currentAction !== this.animation.getBasicAction()) {
-                    this.currentAction.fadeOut(this.animation.getFadeout());
-                    this.currentAction.stop();
-                }
-
-                this.currentAction = nextAction;
-                this.currentAction.reset();
-
-                if (isIdle) {
-                    this.currentAction.setLoop(THREE.LoopRepeat, Infinity);
-                } else {
-                    this.currentAction.setLoop(THREE.LoopOnce, 1);
-                }
-
-                this.currentAction.clampWhenFinished = true;
-                this.currentAction.fadeIn(this.animation.getFadein()).play();
-
-                const onFinish = (e: any) => {
-                    if (e.action === this.currentAction) {
-                        this.currentAction = null;
-                        this.mixer.removeEventListener("finished", onFinish);
-                        this.tryPlayNext();
-                    }
-                };
-                this.mixer.addEventListener("finished", onFinish);
+                this.currentAction = null;
             } else {
-                this.currentAction.stop();
-                this.currentAction.play();
+                return;
             }
         }
+
+        if (!this.queue.length) this.queue.push(this.animation.getBasicAction());
+
+        const nextAction = this.queue.shift()!;
+        nextAction.reset();
+        nextAction.setLoop(THREE.LoopOnce, 1);
+        nextAction.clampWhenFinished = true;
+        nextAction.fadeIn(this.animation.getFadein()).play();
+
+        const onFinish = (e: any) => {
+            if (e.action === this.currentAction) {
+                if (this.currentAction) this.currentAction.fadeOut(this.animation.getFadeout());
+                this.mixer.removeEventListener("finished", onFinish);
+                this.currentAction = null;
+                return this.tryPlayNext();
+            }
+        };
+
+        this.currentAction = nextAction;
+        this.mixer.addEventListener("finished", onFinish);
     }
 
     public startRandom(path_list: string[]) {
@@ -73,7 +58,7 @@ export default class AnimationQueue {
             if (!this.mixer || path_list.length === 0) return;
             const randomIndex = Math.floor(Math.random() * path_list.length);
             this.onqueue(await this.animation.loadAnimation(path_list[randomIndex]));
-        }, 15_000);
+        }, 45_000);
     }
 
     public stop() {

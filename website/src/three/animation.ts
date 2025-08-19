@@ -32,12 +32,11 @@ export default class Animation {
                 url,
                 (gltf: GLTF) => {
                     if (!gltf.animations.length) return reject(new Error(`${url} has no animations`));
-                    let clip = gltf.animations[0];
 
-                    if (clip.tracks.some(track => track.name.endsWith('.position'))) {
-                        clip = clip.clone();
-                        clip.tracks = clip.tracks.filter(track => !track.name.endsWith('.position'));
-                    }
+                    let clip = gltf.animations[0].clone();
+                    clip.tracks = clip.tracks.filter(track => {
+                        return !track.name.endsWith('.position') || track.name === 'mixamorigHips.position';
+                    });
 
                     const action = this.mixer.clipAction(clip);
                     action.stop();

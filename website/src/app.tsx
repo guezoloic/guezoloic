@@ -1,9 +1,9 @@
-import Navbar from "./components/navbar";
-import Three from "./components/three";
-import Section from "./components/section"
-import Projects from "./components/projects";
-import About from "./components/about";
-import Skills from "./components/skills";
+import Navbar from "./components/Navbar";
+import Three from "./components/Three";
+import Section from "./components/Section"
+import Projects from "./components/Projects";
+import About from "./components/About";
+import Skills from "./components/Skills";
 
 import { HomeIcon, CodeBracketIcon, FolderIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";

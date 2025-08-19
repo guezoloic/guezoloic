@@ -1,10 +1,8 @@
 import * as THREE from "three";
 import Animation from "./animation";
 import AnimationQueue from "./animQueue";
-import Character from "./character";
 import Model from "./model";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import ScrollAnimation from "./scroll";
 
 const animations = [
     "animations/idle.glb",
@@ -25,10 +23,8 @@ export class Main {
     private loader: GLTFLoader;
 
     private model!: Model;
-    private character!: Character;
     private animation!: Animation;
     private animQueue!: AnimationQueue;
-    private scroll!: ScrollAnimation
 
     private container: HTMLElement;
 
@@ -41,8 +37,6 @@ export class Main {
             0.1,
             1000
         );
-
-        this.camera.lookAt(0, 0, 0);
 
         this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -72,7 +66,8 @@ export class Main {
         // Model
         this.model = new Model(this.loader);
         await this.model.init(`models/BASEmodel.glb`, this.scene);
-
+        const baseModel = this.model.getModel()!;
+        
         // Mixer
         const mixer = this.model.getMixer();
 
@@ -80,16 +75,26 @@ export class Main {
         this.animation = new Animation(mixer, this.loader, 'animations/idle.glb');
         this.animQueue = new AnimationQueue(mixer, this.animation);
 
-        // character
-        this.character = new Character(this.model.getModel()!, this.scene, this.camera);
+        // camera settings
+        const box = new THREE.Box3().setFromObject(baseModel);
+        const size = new THREE.Vector3();
+        const center = new THREE.Vector3();
+
+        box.getSize(size);
+        box.getCenter(center);
+
+        baseModel.position.sub(center);
+        baseModel.position.y -= size.y * 0.3;
+
+        const fov = this.camera.fov * (Math.PI / 180);
+        const distance = size.y / (2 * Math.tan(fov / 2));
+        this.camera.position.set(0, 0, distance * 1.2);
+        this.camera.lookAt(0, 0, 0);
 
         // run animations
         const wavingAction = await this.animation.loadAnimation('animations/waving.glb');
         this.animQueue.onqueue(wavingAction);
         this.animQueue.startRandom(animations);
-
-        const scrollContainer = document.querySelector('.scroll-container') as HTMLElement;
-        this.scroll = new ScrollAnimation(scrollContainer, this.animQueue, this.animation);
     }
 
     private animate = () => {
@@ -97,7 +102,6 @@ export class Main {
 
         const delta = this.clock.getDelta();
         if (this.model) this.model.update(delta);
-        if (this.character) this.character.applyRootMotion();
         this.renderer.render(this.scene, this.camera);
     }
 

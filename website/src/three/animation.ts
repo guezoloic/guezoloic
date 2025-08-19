@@ -15,7 +15,7 @@ export default class Animation {
         mixer: THREE.AnimationMixer,
         loader: GLTFLoader,
         basicAction_url: string,
-        fadein: number = 0.5, fadeout: number = 0.5) {
+        fadein: number = 0.5, fadeout: number = 0.8) {
         this.mixer = mixer;
         this.loader = loader;
 
@@ -32,11 +32,12 @@ export default class Animation {
                 url,
                 (gltf: GLTF) => {
                     if (!gltf.animations.length) return reject(new Error(`${url} has no animations`));
+                    let clip = gltf.animations[0];
 
-                    let clip = gltf.animations[0].clone();
-                    clip.tracks = clip.tracks.filter(track => {
-                        return !track.name.endsWith('.position') || track.name === 'mixamorigHips.position';
-                    });
+                    if (clip.tracks.some(track => track.name.endsWith('.position'))) {
+                        clip = clip.clone();
+                        clip.tracks = clip.tracks.filter(track => !track.name.endsWith('.position'));
+                    }
 
                     const action = this.mixer.clipAction(clip);
                     action.stop();

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import Animation from "./animation.ts";
+import Animation from "./animation";
 
 export default class AnimationQueue {
     private animation: Animation;

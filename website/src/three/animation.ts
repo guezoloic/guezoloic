@@ -15,7 +15,7 @@ export default class Animation {
         mixer: THREE.AnimationMixer,
         loader: GLTFLoader,
         basicAction_url: string,
-        fadein: number = 0.5, fadeout: number = 0.8) {
+        fadein: number = 0.5, fadeout: number = 0.5) {
         this.mixer = mixer;
         this.loader = loader;
 

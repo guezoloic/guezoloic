@@ -1,17 +1,14 @@
 import * as THREE from "three";
-import Animation from "./animation.ts";
-import AnimationQueue from "./AnimQueue.ts";
-import Character from "./character.ts";
-import Model from "./model.ts";
+import Animation from "./animation";
+import AnimationQueue from "./animQueue";
+import Character from "./character";
+import Model from "./model";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import ScrollAnimation from "./scroll";
 
 const animations = [
     "animations/idle.glb",
     "animations/waving.glb",
-    // "animations/Walking.glb",
-    // "animations/LeftTurn.glb",
-    // "animations/WalkingBackwards.glb",
-    // "animations/RightTurn.glb",
     "animations/StandingW_BriefcaseIdle.glb",
     "animations/Acknowledging.glb",
     "animations/ArmStretching.glb",
@@ -31,6 +28,9 @@ export class Main {
     private character!: Character;
     private animation!: Animation;
     private animQueue!: AnimationQueue;
+    private scroll!: ScrollAnimation
+
+    private container: HTMLElement;
 
     constructor(container?: HTMLElement, loadingManager?: THREE.LoadingManager) {
         this.scene = new THREE.Scene();
@@ -46,7 +46,9 @@ export class Main {
 
         this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        (container ?? document.body).appendChild(this.renderer.domElement);
+
+        this.container = container ?? document.body;
+        this.container.appendChild(this.renderer.domElement);
 
         const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
         this.scene.add(ambientLight);
@@ -85,6 +87,9 @@ export class Main {
         const wavingAction = await this.animation.loadAnimation('animations/waving.glb');
         this.animQueue.onqueue(wavingAction);
         this.animQueue.startRandom(animations);
+
+        const scrollContainer = document.querySelector('.scroll-container') as HTMLElement;
+        this.scroll = new ScrollAnimation(scrollContainer, this.animQueue, this.animation);
     }
 
     private animate = () => {

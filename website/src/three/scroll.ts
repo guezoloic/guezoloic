@@ -1,29 +1,55 @@
 import * as THREE from "three";
+import AnimationQueue from "./animQueue";
+import Animation from "./animation";
 
-export function bindScrollToScrollEffects(
-  scrollContainer: HTMLElement,
-  camera: THREE.PerspectiveCamera,
-  model: THREE.Object3D,
-  offsetZ: number = 10
-) {
-  const initialZ = camera.position.z;
-  const targetZ = initialZ + offsetZ;
+const Mouvement = [
+    "animations/Walking.glb",
+    "animations/LeftTurn.glb",
+    "animations/WalkingBackwards.glb",
+    "animations/RightTurn.glb",
+];
 
-  const handleScroll = () => {
-    const scrollTop = scrollContainer.scrollTop;
-    const maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
-    if (maxScroll <= 0) return;
+export default class ScrollAnimation {
+    private scrollContainer: HTMLElement;
+    private animQueue: AnimationQueue;
+    private animation: Animation;
 
-    const factor = scrollTop / maxScroll;
+    private turned: boolean = false;
+    private backward: boolean = false;
 
-    const translateFactor = Math.min(factor * 2, 1);
-    camera.position.z = initialZ + translateFactor * (targetZ - initialZ);
+    private currentZone: number = -1;
 
-    const rotateFactor = Math.max(factor * 2 - 1, 0);
-    model.rotation.y = rotateFactor * Math.PI;
-  };
+    constructor(scrollContainer: HTMLElement, animQueue: AnimationQueue, animation: Animation) {
+        this.scrollContainer = scrollContainer;
+        this.animQueue = animQueue;
+        this.animation = animation;
 
-  scrollContainer.addEventListener("scroll", handleScroll);
+        scrollContainer.addEventListener('scroll', () => this.handleScroll());
+    }
 
-  return () => scrollContainer.removeEventListener("scroll", handleScroll);
+    private async handleScroll() {
+    const scrollTop = this.scrollContainer.scrollTop;
+    const scrollHeight = this.scrollContainer.scrollHeight - this.scrollContainer.clientHeight;
+    const scrollPercent = scrollTop / scrollHeight;
+
+    let newZone: number = -1;
+
+    if (scrollPercent < 0.35) {
+        if (this.backward) newZone = 0; // Walking
+    } else if (scrollPercent >= 0.75) {
+        if (this.backward && !this.turned) newZone = 1; // LeftTurn
+        else if (this.backward && this.turned) newZone = 3; // RightTurn
+    } else { // between 0.5 and 0.75
+        if (!this.backward && !this.turned) newZone = 2; // WalkingBackwards
+    }
+
+    if (newZone === -1 || newZone === this.currentZone) return;
+
+    this.backward = newZone === 2;
+    this.turned = newZone === 1 || newZone === 3;
+    this.currentZone = newZone;
+
+    const action = await this.animation.loadAnimation(Mouvement[newZone]);
+    this.animQueue.onqueue(action);
+}
 }

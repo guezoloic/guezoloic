@@ -1,34 +1,38 @@
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar";
 import Three from "./components/three";
-import Section from "./components/Section"
-import Projects from "./components/Projects";
-import About from "./components/About";
+import Section from "./components/section"
+import Projects from "./components/projects";
+import About from "./components/about";
+import Skills from "./components/skills";
 
 import { HomeIcon, CodeBracketIcon, FolderIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 
-const buttons = [
-	{ label: "Home", icon: HomeIcon, href: "home" },
-	{ label: "Skills", icon: CodeBracketIcon, href: "skills" },
-	{ label: "Projects", icon: FolderIcon, href: "projects" },
-];
-
 function App() {
 	const [aboutOpen, setAboutOpen] = useState(false);
+	const [skillsOpen, setSkillsOpen] = useState(false);
+	const [projectsOpen, setProjectsOpen] = useState(false);
+
+	const buttons = [
+		{ label: "Home", icon: HomeIcon, action: () => setAboutOpen(true) },
+		{ label: "Skills", icon: CodeBracketIcon, action: () => setSkillsOpen(true) },
+		{ label: "Projects", icon: FolderIcon, action: () => setProjectsOpen(true) },
+	];
 
 	return (
 		<div className="relative w-full h-screen">
 			<Three />
-			<Navbar buttons={buttons} onOpenAbout={() => setAboutOpen(true)} />
-      		<About open={aboutOpen} onClose={() => setAboutOpen(false)} />
-				
-			<div className="relative z-10 h-screen overflow-y-scroll scroll-container">
-				<Section id={buttons[0].href} children="" />
-				<div className="border border-white/20 rounded-3xl shadow-md">
-					<Section id={buttons[1].href}><h2 className="text-3xl text-white">third section</h2></Section>
-					<Section id={buttons[2].href}><Projects /></Section>
-				</div>
-			</div>
+			<Navbar buttons={buttons} sectionOpen={aboutOpen || skillsOpen || projectsOpen}/>
+
+			<Section open={aboutOpen} onClose={() => setAboutOpen(false)}>
+				<About />
+			</Section>
+			<Section open={skillsOpen} onClose={() => setSkillsOpen(false)}>
+				<Skills />
+			</Section>
+			<Section open={projectsOpen} onClose={() => setProjectsOpen(false)}>
+				<Projects />
+			</Section>
 		</div>
 	);
 }

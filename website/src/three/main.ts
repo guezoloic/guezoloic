@@ -5,13 +5,12 @@ import Model from "./model";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 const animations = [
-    "animations/idle.glb",
-    "animations/waving.glb",
     "animations/StandingW_BriefcaseIdle.glb",
     "animations/Acknowledging.glb",
     "animations/ArmStretching.glb",
     "animations/OffensiveIdle.glb",
     "animations/ThoughtfulHeadShake.glb",
+    "animations/DwarfIdle"
 ];
 
 export class Main {

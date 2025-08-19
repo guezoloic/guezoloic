@@ -38,23 +38,23 @@ const Projects: React.FC = () => {
 
     return (
         <section
-            id="projects"
-            className="min-h-screen px-6 md:px-24 py-10 flex flex-col items-center gap-10"
+            className="w-full max-w-5xl mx-auto px-4"
         >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-10 text-center">
-                My Projects
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-white">
+                Projects
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {repos.map((repo) => (
                     <a
                         key={repo.name}
                         href={repo.html_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-black/30 border border-white/20 rounded-xl shadow-md p-6 hover:scale-105 transition-transform duration-300 flex flex-col justify-between"
+                        className="bg-black/30 bg-opacity-70 p-6 rounded-xl shadow-lg hover:scale-105 transition-transform"
                     >
-                        <h3 className="text-xl font-bold text-white mb-2">{repo.name}</h3>
-                        <p className="text-gray-300 mb-4">{repo.description || "No description"}</p>
+                        <h3 className="text-xl font-semibold mb-2 text-white">{repo.name}</h3>
+                        <p className="text-gray-200 text-sm">{repo.description || "No description"}</p>
+                        
                         {repo.language && (
                             <span className="text-sm font-medium text-gray-400">{repo.language}</span>
                         )}

@@ -58,7 +58,7 @@ export default class AnimationQueue {
             if (!this.mixer || path_list.length === 0) return;
             const randomIndex = Math.floor(Math.random() * path_list.length);
             this.onqueue(await this.animation.loadAnimation(path_list[randomIndex]));
-        }, 45_000);
+        }, 30_000);
     }
 
     public stop() {

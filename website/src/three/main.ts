@@ -4,6 +4,8 @@ import AnimationQueue from "./animQueue";
 import Model from "./model";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
+import bindScrollToScrollEffects from "./scroll";
+
 const animations = [
     "animations/StandingW_BriefcaseIdle.glb",
     "animations/Acknowledging.glb",
@@ -94,6 +96,8 @@ export class Main {
         const wavingAction = await this.animation.loadAnimation('animations/waving.glb');
         this.animQueue.onqueue(wavingAction);
         this.animQueue.startRandom(animations);
+
+        bindScrollToScrollEffects(this.camera, baseModel, 4.5);
     }
 
     private animate = () => {

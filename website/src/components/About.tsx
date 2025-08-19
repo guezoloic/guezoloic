@@ -3,9 +3,8 @@ import { motion } from "framer-motion";
 
 const About: React.FC = () => {
   return (
-    <div className="flex flex-col px-6 md:px-24 py-16 md:py-32 max-w-5xl mx-auto">
-
-      <div className="flex justify-between flex-row items-start md:items-center gap-6 md:gap-10">
+    <div className="flex flex-col px-4 md:px-12 py-12 md:py-20 max-w-5xl mx-auto">
+      <div className="flex justify-between flex-row items-start md:items-center gap-4 md:gap-8">
         <motion.h2
           className="text-3xl md:text-5xl font-bold text-white leading-tight"
           initial={{ opacity: 0, x: -50 }}
@@ -27,7 +26,7 @@ const About: React.FC = () => {
       </div>
 
       <motion.div
-        className="mt-8 md:mt-12 p-6 md:p-12 bg-black/20 rounded-xl text-gray-300 space-y-6 md:space-y-8"
+        className="mt-6 md:mt-10 p-4 md:p-8 bg-black/20 rounded-xl text-gray-300 space-y-4 md:space-y-6"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}

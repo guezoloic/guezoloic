@@ -19,11 +19,13 @@ function App() {
 		{ label: "Projects", icon: FolderIcon, action: () => setProjectsOpen(true) },
 	];
 
+	const sectionOpen = aboutOpen || skillsOpen || projectsOpen;
+
 	return (
 		<div className="relative w-full h-screen">
+			{!sectionOpen && <div id="scrollContainer" className="h-[200vh]"></div>}
 			<Three />
 			<Navbar buttons={buttons} sectionOpen={aboutOpen || skillsOpen || projectsOpen}/>
-
 			<Section open={aboutOpen} onClose={() => setAboutOpen(false)}>
 				<About />
 			</Section>

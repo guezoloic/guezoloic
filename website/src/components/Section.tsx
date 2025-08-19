@@ -17,12 +17,24 @@ const Section: React.FC<SectionProps> = ({ open, onClose, children }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <button
+          <motion.button
+            key="close-btn"
             onClick={onClose}
-            className="absolute top-6 right-6 text-gray-400 hover:text-white text-3xl z-50"
+            className="fixed bottom-4 left-1/2 -translate-x-1/2 
+             z-50 flex items-center justify-center 
+             w-12 h-12 md:w-14 md:h-14 
+             rounded-full backdrop-blur-lg bg-black/30 
+             shadow-md text-xl md:text-2xl text-white 
+             transition-all duration-200 ease-out
+             hover:scale-110 hover:bg-white/25 
+             active:scale-95 active:shadow-md"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3 }}
           >
             ✕
-          </button>
+          </motion.button>
 
           <motion.div
             initial={{ opacity: 0, y: 40 }}

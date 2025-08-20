@@ -4,37 +4,59 @@ import Section from "./components/Section"
 import Projects from "./components/Projects";
 import About from "./components/About";
 import Skills from "./components/Skills";
+import PageBlock from "./components/PageBlock";
 
 import { HomeIcon, CodeBracketIcon, FolderIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 
 function App() {
-	const [aboutOpen, setAboutOpen] = useState(false);
-	const [skillsOpen, setSkillsOpen] = useState(false);
-	const [projectsOpen, setProjectsOpen] = useState(false);
+	const [menuOpen, setMenuOpen] = useState(false);
 
 	const buttons = [
-		{ label: "Home", icon: HomeIcon, action: () => setAboutOpen(true) },
-		{ label: "Skills", icon: CodeBracketIcon, action: () => setSkillsOpen(true) },
-		{ label: "Projects", icon: FolderIcon, action: () => setProjectsOpen(true) },
+		{
+			label: "Home",
+			icon: HomeIcon,
+			action: () => {
+				document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+			}
+		},
+		{
+			label: "Skills",
+			icon: CodeBracketIcon,
+			action: () => {
+				document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
+			}
+		},
+		{
+			label: "Projects",
+			icon: FolderIcon,
+			action: () => {
+				document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+			}
+		},
 	];
 
-	const sectionOpen = aboutOpen || skillsOpen || projectsOpen;
+	const sectionOpen = menuOpen;
 
 	return (
-		<div className="relative w-full h-screen">
-			{!sectionOpen && <div id="scrollContainer" className="h-[200vh]"></div>}
+		<div  className="relative w-full h-screen">
 			<Three />
-			<Navbar buttons={buttons} sectionOpen={aboutOpen || skillsOpen || projectsOpen}/>
-			<Section open={aboutOpen} onClose={() => setAboutOpen(false)}>
-				<About />
-			</Section>
-			<Section open={skillsOpen} onClose={() => setSkillsOpen(false)}>
-				<Skills />
-			</Section>
-			<Section open={projectsOpen} onClose={() => setProjectsOpen(false)}>
-				<Projects />
-			</Section>
+			<Navbar buttons={buttons} sectionOpen={sectionOpen} openNameButton={setMenuOpen} />
+			<Section open={menuOpen} onClose={() => setMenuOpen(false)}><div></div></Section>
+			{!sectionOpen && (
+				<div className="overflow-y-scroll">
+					<div className="h-screen"></div>
+					<PageBlock id="home">
+						<About />
+					</PageBlock>
+					<PageBlock id="skills">
+						<Skills />
+					</PageBlock>
+					<PageBlock id="projects">
+						<Projects sectionOpen={sectionOpen} />
+					</PageBlock>
+				</div>
+			)}
 		</div>
 	);
 }

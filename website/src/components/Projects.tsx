@@ -7,7 +7,11 @@ export interface ProjectProps {
     language: string | null;
 }
 
-const Projects: React.FC = () => {
+type ProjectsProps = {
+  sectionOpen: boolean;
+};
+
+const Projects: React.FC<ProjectsProps> = ({ sectionOpen }) => {
     const [repos, setRepos] = useState<ProjectProps[]>([]);
 
     useEffect(() => {
@@ -48,6 +52,7 @@ const Projects: React.FC = () => {
                     <a
                         key={repo.name}
                         href={repo.html_url}
+                        tabIndex={sectionOpen ? -1 : 0}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-black/30 bg-opacity-70 p-6 rounded-xl shadow-lg hover:scale-105 transition-transform"

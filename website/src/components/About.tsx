@@ -1,12 +1,22 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const About: React.FC = () => {
+  const { scrollYProgress } = useScroll();
+
+  const titleY = useTransform(scrollYProgress, [0, 0.3], [50, 0]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
+
+  const contentY = useTransform(scrollYProgress, [0, 0.5], [30, 0]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+
+
   return (
     <div className="flex flex-col px-4 md:px-12 py-12 md:py-20 max-w-5xl mx-auto">
       <div className="flex justify-between flex-row items-start md:items-center gap-4 md:gap-8">
         <motion.h2
           className="text-3xl md:text-5xl font-bold text-white leading-tight"
+          style={{ y: titleY, opacity: titleOpacity }}
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
@@ -27,6 +37,7 @@ const About: React.FC = () => {
 
       <motion.div
         className="mt-6 md:mt-10 p-4 md:p-8 bg-black/20 rounded-xl text-gray-300 space-y-4 md:space-y-6"
+        style={{ y: contentY, opacity: contentOpacity }}
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}

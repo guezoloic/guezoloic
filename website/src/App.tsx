@@ -8,32 +8,18 @@ import PageBlock from "./components/PageBlock";
 
 import { HomeIcon, CodeBracketIcon, FolderIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
+import Title from "./components/Title";
 
 function App() {
 	const [menuOpen, setMenuOpen] = useState(false);
 
+	const scrollFunction = (label: string) => 
+		document.getElementById(label)?.scrollIntoView({ behavior: "smooth" });
+
 	const buttons = [
-		{
-			label: "Home",
-			icon: HomeIcon,
-			action: () => {
-				document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
-			}
-		},
-		{
-			label: "Skills",
-			icon: CodeBracketIcon,
-			action: () => {
-				document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
-			}
-		},
-		{
-			label: "Projects",
-			icon: FolderIcon,
-			action: () => {
-				document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
-			}
-		},
+		{ label: "Presentation",icon: HomeIcon,			action: () => scrollFunction("presentation"),	},
+		{ label: "Skills",		icon: CodeBracketIcon,	action: () => scrollFunction("skills"),			},
+		{ label: "Projects",	icon: FolderIcon,		action: () => scrollFunction("projects"),		},
 	];
 
 	const sectionOpen = menuOpen;
@@ -41,21 +27,15 @@ function App() {
 	return (
 		<div  className="relative w-full h-screen">
 			<Three />
-			<Navbar buttons={buttons} sectionOpen={sectionOpen} openNameButton={setMenuOpen} />
+			<Navbar buttons={buttons} sectionOpen={sectionOpen} openNameButton={setMenuOpen} labelname="test"/>
 			<Section open={menuOpen} onClose={() => setMenuOpen(false)}><div></div></Section>
 			{!sectionOpen && (
-				<div className="overflow-y-scroll">
-					<div className="h-screen"></div>
-					<PageBlock id="home">
-						<About />
-					</PageBlock>
-					<PageBlock id="skills">
-						<Skills />
-					</PageBlock>
-					<PageBlock id="projects">
-						<Projects sectionOpen={sectionOpen} />
-					</PageBlock>
-				</div>
+				<>
+					<PageBlock id="home"><Title /></PageBlock>
+					<PageBlock id="presentation"><About /></PageBlock>
+					<PageBlock id="skills"><Skills /></PageBlock>
+					<PageBlock id="projects"><Projects sectionOpen={sectionOpen} /></PageBlock>
+				</>
 			)}
 		</div>
 	);

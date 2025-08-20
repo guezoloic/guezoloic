@@ -14,7 +14,6 @@ export default function bindScrollToScrollEffects(
     if (maxScroll <= 0) return;
 
     const factor = scrollTop / maxScroll;
-    console.log(factor);
 
     const translateFactor = Math.min(factor, 1);
     camera.position.z = initialZ + translateFactor * (targetZ - initialZ);

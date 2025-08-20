@@ -12,7 +12,7 @@ const animations = [
     "animations/ArmStretching.glb",
     "animations/OffensiveIdle.glb",
     "animations/ThoughtfulHeadShake.glb",
-    "animations/DwarfIdle"
+    "animations/DwarfIdle.glb"
 ];
 
 export class Main {

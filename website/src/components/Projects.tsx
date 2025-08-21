@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 
 export interface ProjectProps {
@@ -8,7 +9,7 @@ export interface ProjectProps {
 }
 
 type ProjectsProps = {
-  sectionOpen: boolean;
+    sectionOpen: boolean;
 };
 
 const Projects: React.FC<ProjectsProps> = ({ sectionOpen }) => {
@@ -41,29 +42,35 @@ const Projects: React.FC<ProjectsProps> = ({ sectionOpen }) => {
     }, []);
 
     return (
-        <section
-            className="w-full max-w-5xl mx-auto px-4"
-        >
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-white">
+        <section className="relative max-w-5xl mx-auto bg-gradient-to-br mt-5 from-black/60 to-black/30 backdrop-blur-lg rounded-2xl p-6 md:p-12 flex flex-col gap-8 text-gray-100 shadow-2xl">
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-green-200 via-green-400 via-emerald-500 to-green-800">
                 Projects
             </h2>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {repos.map((repo) => (
-                    <a
+                {repos.map((repo, i) => (
+                    <motion.a
                         key={repo.name}
                         href={repo.html_url}
                         tabIndex={sectionOpen ? -1 : 0}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-black/30 bg-opacity-70 p-6 rounded-xl shadow-lg hover:scale-105 transition-transform"
+                        className="bg-black/30 p-6 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300 flex flex-col gap-3"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false, amount: 0.6 }}
+                        transition={{ duration: 0.4, delay: i * 0.1 }}
                     >
-                        <h3 className="text-xl font-semibold mb-2 text-white">{repo.name}</h3>
-                        <p className="text-gray-200 text-sm">{repo.description || "No description"}</p>
-                        
+                        <h3 className="text-xl font-semibold text-white">{repo.name}</h3>
+                        <p className="text-gray-200 text-sm">
+                            {repo.description || "No description"}
+                        </p>
                         {repo.language && (
-                            <span className="text-sm font-medium text-gray-400">{repo.language}</span>
+                            <span className="text-sm font-medium text-emerald-400">
+                                {repo.language}
+                            </span>
                         )}
-                    </a>
+                    </motion.a>
                 ))}
             </div>
         </section>

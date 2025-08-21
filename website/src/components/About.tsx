@@ -36,10 +36,10 @@ const About: React.FC = () => {
 
   return (
     <div
-      className="relative z-10 max-w-5xl mx-auto bg-gradient-to-br from-black/60 to-black/30 backdrop-blur-lg rounded-2xl p-6 md:p-12 flex flex-col gap-6 md:gap-8 text-gray-100 shadow-2xl"
+      className="relative z-10 max-w-5xl mx-auto bg-gradient-to-br mt-5 from-black/60 to-black/30 backdrop-blur-lg rounded-2xl p-6 md:p-12 flex flex-col gap-6 md:gap-8 text-gray-100 shadow-2xl"
     >
       <h2
-        className="text-3xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"
+        className="text-3xl sm:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-200 via-green-400 via-green-500 via-emerald-600 to-green-800"
       >
         Hi, I'm Loïc! 👋
       </h2>
@@ -52,9 +52,9 @@ const About: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0 }}
-            transition={{ duration: 0.6, delay: i * 0.35 }}
+            transition={{ duration: 0.6, delay: i* 0.09 }}
           >
-            <span className="mt-1 text-purple-400"><paragraph.icon className="w-6 h-6" /></span>
+            <span className="mt-1 text-emerald-400"><paragraph.icon className="w-6 h-6" /></span>
             <p className="text-sm md:text-base leading-relaxed">{paragraph.text}</p>
           </motion.div>
         ))}

@@ -35,6 +35,7 @@ function App() {
 					<PageBlock id="presentation"><About /></PageBlock>
 					<PageBlock id="skills"><Skills /></PageBlock>
 					<PageBlock id="projects"><Projects sectionOpen={sectionOpen} /></PageBlock>
+					<div className="h-screen flex"></div>
 				</>
 			)}
 		</div>

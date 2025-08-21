@@ -4,13 +4,13 @@ import React from "react";
 const Title: React.FC = () => {
     return (
         <div className="absolute top-0 z-50 bg-transparent flex flex-col px-4 md:px-12 pt-6 md:pt-5 max-w-5xl justify-start">
-            <div className="flex justify-between flex-row items-center gap-50">
+            <div className="flex flex-row justify-between items-center gap-15">
                 <motion.div
                     className="text-x2l md:text-3xl font-bold text-white leading-tight"
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: false, amount: 0.5 }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.3 }}
                 >
                     <h3>Hello There! 👋 </h3>
                     <p className="text-sm font-medium text-gray-400">GUEZO Loïc</p>

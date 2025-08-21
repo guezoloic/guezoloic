@@ -4,7 +4,7 @@ const PageBlock = ({ children, id }) => {
     return (
         <section
             id={id}
-            className="h-screen flex items-center justify-center m-6 relative z-40"
+            className="h-4/6 flex items-center justify-center m-6 relative z-40"
         >
             {children}
         </section>

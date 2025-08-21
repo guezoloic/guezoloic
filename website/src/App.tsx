@@ -33,8 +33,8 @@ function App() {
 				<>
 					<PageBlock id="home"><Title /></PageBlock>
 					<PageBlock id="presentation"><About /></PageBlock>
-					<PageBlock id="skills"><Skills /></PageBlock>
-					<PageBlock id="projects"><Projects sectionOpen={sectionOpen} /></PageBlock>
+					{/* <PageBlock id="skills"><Skills /></PageBlock>
+					<PageBlock id="projects"><Projects sectionOpen={sectionOpen} /></PageBlock> */}
 				</>
 			)}
 		</div>

@@ -2,7 +2,7 @@ import React, { JSX } from "react";
 import { motion } from "framer-motion";
 import * as SOLID from "@heroicons/react/24/solid";
 
-const About: React.FC<{id: string}> = ({id}) => {
+const About: React.FC<{ id: string }> = ({ id }) => {
   const paragraphs: { icon; text: string }[] = [
     {
       icon: SOLID.LightBulbIcon,
@@ -35,10 +35,9 @@ const About: React.FC<{id: string}> = ({id}) => {
   ];
 
   return (
-            <section className="my-5 relative max-w-5xl mx-auto mt-5 rounded-2xl p-6 md:p-12 flex flex-col gap-8 text-gray-100">
+    <section id={id} className="my-5 relative max-w-5xl mx-auto mt-5 rounded-2xl p-6 md:p-12 flex flex-col gap-8 text-gray-100">
 
       <h2
-        id={id}
         className="text-3xl sm:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-200 via-green-400 via-green-500 via-emerald-600 to-green-800"
       >
         Hi, I'm Loïc! 👋
@@ -52,7 +51,7 @@ const About: React.FC<{id: string}> = ({id}) => {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0 }}
-            transition={{ duration: 0.6, delay: i* 0.09 }}
+            transition={{ duration: 0.6, delay: i * 0.09 }}
           >
             <span className="mt-1 text-emerald-400"><paragraph.icon className="w-6 h-6" /></span>
             <p className="text-sm md:text-base leading-relaxed">{paragraph.text}</p>

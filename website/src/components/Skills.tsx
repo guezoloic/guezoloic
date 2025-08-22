@@ -59,9 +59,8 @@ const skillsData = [
 
 const Skills: React.FC<{ id: string }> = ({ id }) => {
     return (
-        <section className="my-5 relative max-w-5xl mx-auto mt-5 rounded-2xl p-6 md:p-12 flex flex-col gap-8 text-gray-100">
+        <section id={id} className="my-5 relative max-w-5xl mx-auto mt-5 rounded-2xl p-6 md:p-12 flex flex-col gap-8 text-gray-100">
             <h2
-                id={id}
                 className="text-3xl sm:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-200 via-green-400 via-green-500 via-emerald-600 to-green-800"
             >
                 Skills

@@ -33,12 +33,14 @@ function App() {
 				<>
 					<Title />
 					<PageBlock>
-						<About id="about" />
-						<Skills id="skills"  />
-						<Projects id="projects" />
+						<div className="bg-gradient-to-br my-5 from-black/60 to-black/30 backdrop-blur-lg rounded-2xl shadow-2xl p-4 md:p-6">
+							<About id="about" />
+							<Skills id="skills" />
+							<Projects id="projects" />
+						</div>
+						<div className="h-screen flex"></div>
 					</PageBlock>
-					<div className="h-screen flex"></div>
-					<p className="text-white">Desk: Pedro Belthori</p>	
+					<p className="text-white">Desk: Pedro Belthori</p>
 				</>
 			)}
 

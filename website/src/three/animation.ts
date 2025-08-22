@@ -12,11 +12,11 @@ export default class Animation {
     private fadeout: number;
 
     constructor(
-        mixer: THREE.AnimationMixer,
+        model: THREE.Object3D,
         loader: GLTFLoader,
         basicAction_url: string,
         fadein: number = 0.5, fadeout: number = 0.8) {
-        this.mixer = mixer;
+        this.mixer = new THREE.AnimationMixer(model);
         this.loader = loader;
 
         this.fadein = fadein;
@@ -66,4 +66,13 @@ export default class Animation {
     public getFadein(): number { return this.fadein; }
 
     public getFadeout(): number { return this.fadeout; }
+
+    public update(delta: number) {
+        this.mixer?.update(delta);
+    }
+
+    public getMixer(): THREE.AnimationMixer { 
+        if (!this.mixer) throw new Error("Mixer not initialized yet!"); 
+        return this.mixer 
+    }
 }

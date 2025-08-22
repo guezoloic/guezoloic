@@ -17,8 +17,8 @@ export default class AnimationQueue {
     private mixer: THREE.AnimationMixer;
     private randomIntervalId: number | null = null;
 
-    constructor(mixer: THREE.AnimationMixer, animation: Animation) {
-        this.mixer = mixer;
+    constructor(animation: Animation) {
+        this.mixer = animation.getMixer();
         this.animation = animation;
     }
 

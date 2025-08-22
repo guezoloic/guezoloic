@@ -7,7 +7,8 @@ export default function bindScrollToScrollEffects(
   animQueue: AnimationQueue,
   animation: Animation,
   basicAnimation: string,
-  offsetZ: number = 10
+  offsetZ: number = 10,
+  modelToShow?: THREE.Object3D[]
 ) {
   const initialZ = camera.position.z;
   const targetZ = initialZ + offsetZ;
@@ -24,6 +25,7 @@ export default function bindScrollToScrollEffects(
     if (factor >= 0.8) { // typing
       if (!isTyping) {
         isTyping = true;
+        if (modelToShow) modelToShow.map((element) => element.visible = true);
         await animation.setBasicAction("animations/typing.glb");
         animQueue.stop();
         animQueue.tryPlayNext(true);
@@ -31,6 +33,7 @@ export default function bindScrollToScrollEffects(
     } else { // idle
       if (isTyping) {
         isTyping = false;
+        if (modelToShow) modelToShow.map((element) => element.visible = false);
         await animation.setBasicAction(basicAnimation);
         animQueue.stop();
         animQueue.startRandom();

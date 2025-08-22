@@ -37,7 +37,8 @@ function App() {
 						<Skills id="skills"  />
 						<Projects id="projects" />
 					</PageBlock>
-					<div className="h-screen flex"></div>	
+					<div className="h-screen flex"></div>
+					<p className="text-white">Desk: Pedro Belthori</p>	
 				</>
 			)}
 

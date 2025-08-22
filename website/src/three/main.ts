@@ -5,11 +5,12 @@ import Model from "./model";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 import bindScrollToScrollEffects from "./scroll";
+import Camera from "./camera";
 
 export class Main {
     public scene: THREE.Scene;
-    public camera: THREE.PerspectiveCamera;
     public renderer: THREE.WebGLRenderer;
+    public camera: THREE.PerspectiveCamera;
 
     private clock: THREE.Clock;
     private loader: GLTFLoader;
@@ -57,45 +58,59 @@ export class Main {
     private async main() {
         // Model
         this.model = new Model(this.loader);
-        await this.model.init(`models/BASEmodel.glb`, this.scene);
-        const baseModel = this.model.getModel()!;
-        
-        // Mixer
-        const mixer = this.model.getMixer();
+        const baseModel = await this.model.init(`models/BASEmodel.glb`, this.scene);
+        const deskModel = await this.model.init("models/desk_low-poly.glb", this.scene, false);
+        deskModel.scale.set(0.5, 0.5, 0.5);
+        deskModel.position.set(0, 0, 50);
+        deskModel.rotation.y = Math.PI / 2;
+
+        // const chairModel= await this.model.init("models/chair.glb", this.scene, false);
 
         // Animation
-        this.animation = new Animation(mixer, this.loader, 'animations/idle.glb');
-        this.animQueue = new AnimationQueue(mixer, this.animation);
+        this.animation = new Animation(baseModel, this.loader, 'animations/idle.glb');
+        this.animQueue = new AnimationQueue(this.animation);
 
-        // camera settings
-        const box = new THREE.Box3().setFromObject(baseModel);
-        const size = new THREE.Vector3();
-        const center = new THREE.Vector3();
+        // camera
+        const cameraBaseModel = new Camera(this.camera, baseModel);
+        cameraBaseModel.centerCamera((box, size, center) => {
+            baseModel.position.sub(center);
+            baseModel.position.y -= size.y * 0.3;
+        });
+        cameraBaseModel.positionCamera();
 
-        box.getSize(size);
-        box.getCenter(center);
+        const cameraDeskModel = new Camera(this.camera, deskModel);
 
-        baseModel.position.sub(center);
-        baseModel.position.y -= size.y * 0.3;
+        cameraDeskModel.centerCamera((box, size, center) => {
+            const scaleFactor = 0.01;
+            deskModel.scale.set(scaleFactor, scaleFactor, scaleFactor);
 
-        const fov = this.camera.fov * (Math.PI / 180);
-        const distance = size.y / (2 * Math.tan(fov / 2));
-        this.camera.position.set(0, 0, distance * 1.2);
-        this.camera.lookAt(0, 0, 0);
+            const deskBox = new THREE.Box3().setFromObject(deskModel);
+            const deskCenter = new THREE.Vector3();
+            deskBox.getCenter(deskCenter);
+            deskModel.position.sub(deskCenter);
+
+            deskModel.position.x += center.x-0.6;
+            deskModel.position.z -= center.z - size.z / 2 + 3.5;
+            deskModel.position.y -= 1.25;
+
+            console.log(
+                `Desk position: x=${deskModel.position.x.toFixed(2)}, y=${deskModel.position.y.toFixed(2)}, z=${deskModel.position.z.toFixed(2)}`
+            );
+        });
 
         // run animations
         const wavingAction = await this.animation.loadAnimation('animations/waving.glb');
         this.animQueue.onqueue(wavingAction);
         this.animQueue.startRandom();
 
-        bindScrollToScrollEffects(this.camera, this.animQueue, this.animation, 'animations/idle.glb', 4.5);
+        bindScrollToScrollEffects(this.camera, this.animQueue, this.animation, 'animations/idle.glb', 4.5, [deskModel]);
     }
 
     private animate = () => {
         requestAnimationFrame(this.animate);
 
         const delta = this.clock.getDelta();
-        if (this.model) this.model.update(delta);
+        if (this.animation) this.animation.update(delta);
         this.renderer.render(this.scene, this.camera);
     }
 

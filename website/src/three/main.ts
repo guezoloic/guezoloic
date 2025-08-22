@@ -6,15 +6,6 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 import bindScrollToScrollEffects from "./scroll";
 
-const animations = [
-    "animations/StandingW_BriefcaseIdle.glb",
-    "animations/Acknowledging.glb",
-    "animations/ArmStretching.glb",
-    "animations/OffensiveIdle.glb",
-    "animations/ThoughtfulHeadShake.glb",
-    "animations/DwarfIdle.glb"
-];
-
 export class Main {
     public scene: THREE.Scene;
     public camera: THREE.PerspectiveCamera;
@@ -95,9 +86,9 @@ export class Main {
         // run animations
         const wavingAction = await this.animation.loadAnimation('animations/waving.glb');
         this.animQueue.onqueue(wavingAction);
-        this.animQueue.startRandom(animations);
+        this.animQueue.startRandom();
 
-        bindScrollToScrollEffects(this.camera, baseModel, 4.5);
+        bindScrollToScrollEffects(this.camera, this.animQueue, this.animation, 'animations/idle.glb', 4.5);
     }
 
     private animate = () => {

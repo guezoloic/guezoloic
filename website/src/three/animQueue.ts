@@ -1,11 +1,21 @@
 import * as THREE from "three";
 import Animation from "./animation";
 
+const animations = [
+    "animations/StandingW_BriefcaseIdle.glb",
+    "animations/Acknowledging.glb",
+    "animations/ArmStretching.glb",
+    "animations/OffensiveIdle.glb",
+    "animations/ThoughtfulHeadShake.glb",
+    "animations/DwarfIdle.glb"
+];
+
 export default class AnimationQueue {
     private animation: Animation;
     private queue: THREE.AnimationAction[] = [];
     private currentAction: THREE.AnimationAction | null = null;
     private mixer: THREE.AnimationMixer;
+    private randomIntervalId: number | null = null;
 
     constructor(mixer: THREE.AnimationMixer, animation: Animation) {
         this.mixer = mixer;
@@ -22,13 +32,18 @@ export default class AnimationQueue {
         this.tryPlayNext(true);
     }
 
-    private async tryPlayNext(force: boolean = false) {
-        if (this.currentAction && !force) {
-            if (this.currentAction && (this.currentAction as any).isBasicClone) {
+    public async tryPlayNext(force: boolean = false) {
+        if (this.currentAction) {
+            if (force) {
                 this.currentAction.fadeOut(this.animation.getFadeout());
                 this.currentAction = null;
             } else {
-                return;
+                if ((this.currentAction as any).isBasicClone) {
+                    this.currentAction.fadeOut(this.animation.getFadeout());
+                    this.currentAction = null;
+                } else {
+                    return;
+                }
             }
         }
 
@@ -53,18 +68,31 @@ export default class AnimationQueue {
         this.mixer.addEventListener("finished", onFinish);
     }
 
-    public startRandom(path_list: string[]) {
-        window.setInterval(async () => {
-            if (!this.mixer || path_list.length === 0) return;
-            const randomIndex = Math.floor(Math.random() * path_list.length);
-            this.onqueue(await this.animation.loadAnimation(path_list[randomIndex]));
+    public startRandom() {
+        if (this.randomIntervalId !== null) return;
+
+        this.randomIntervalId = window.setInterval(async () => {
+            if (!this.mixer) return;
+            const randomIndex = Math.floor(Math.random() * animations.length);
+            this.onqueue(await this.animation.loadAnimation(animations[randomIndex]));
         }, 30_000);
     }
 
-    public stop() {
+    public stopRandom() {
+        if (this.randomIntervalId !== null) {
+            clearInterval(this.randomIntervalId);
+            this.randomIntervalId = null;
+        }
+    }
+
+    public clearQueue() {
         this.queue = [];
+    }
+
+    public stop() {
+        this.clearQueue();
         this.currentAction?.fadeOut(this.animation.getFadeout());
         this.currentAction = null;
-        this.onqueue(this.animation.getBasicAction());
+        this.stopRandom();
     }
 }

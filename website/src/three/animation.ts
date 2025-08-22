@@ -52,7 +52,7 @@ export default class Animation {
         });
     }
 
-    private async setBasicAction(url: string) {
+    public async setBasicAction(url: string) {
         this.basicAction = await this.loadAnimation(url);
     }
 

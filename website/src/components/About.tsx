@@ -2,7 +2,7 @@ import React, { JSX } from "react";
 import { motion } from "framer-motion";
 import * as SOLID from "@heroicons/react/24/solid";
 
-const About: React.FC = () => {
+const About: React.FC<{id: string}> = ({id}) => {
   const paragraphs: { icon; text: string }[] = [
     {
       icon: SOLID.LightBulbIcon,
@@ -35,10 +35,10 @@ const About: React.FC = () => {
   ];
 
   return (
-    <div
-      className="relative z-10 max-w-5xl mx-auto bg-gradient-to-br mt-5 from-black/60 to-black/30 backdrop-blur-lg rounded-2xl p-6 md:p-12 flex flex-col gap-6 md:gap-8 text-gray-100 shadow-2xl"
-    >
+            <section className="my-5 relative max-w-5xl mx-auto mt-5 rounded-2xl p-6 md:p-12 flex flex-col gap-8 text-gray-100">
+
       <h2
+        id={id}
         className="text-3xl sm:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-200 via-green-400 via-green-500 via-emerald-600 to-green-800"
       >
         Hi, I'm Loïc! 👋
@@ -59,7 +59,7 @@ const About: React.FC = () => {
           </motion.div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

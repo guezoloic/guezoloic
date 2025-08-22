@@ -3,8 +3,12 @@ import React from "react";
 
 const Title: React.FC = () => {
   return (
-    <section
-      className="min-h-[35vh] flex items-center justify-center m-6"
+    <motion.section
+      className="flex items-center justify-center m-6 min-h-[50vh]"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ amount: 0.2, once: false }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
     >
       <div className="absolute top-0 bg-transparent flex flex-col px-4 md:px-12 pt-6 md:pt-5 max-w-5xl justify-start">
         <div className="flex flex-row justify-between items-center gap-15">
@@ -38,7 +42,7 @@ const Title: React.FC = () => {
 
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

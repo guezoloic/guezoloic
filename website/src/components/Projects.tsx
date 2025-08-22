@@ -8,11 +8,7 @@ export interface ProjectProps {
     language: string | null;
 }
 
-type ProjectsProps = {
-    sectionOpen: boolean;
-};
-
-const Projects: React.FC<ProjectsProps> = ({ sectionOpen }) => {
+const Projects: React.FC<{ id: string }> = ({ id }) => {
     const [repos, setRepos] = useState<ProjectProps[]>([]);
 
     useEffect(() => {
@@ -42,8 +38,11 @@ const Projects: React.FC<ProjectsProps> = ({ sectionOpen }) => {
     }, []);
 
     return (
-        <section className="relative max-w-5xl mx-auto bg-gradient-to-br mt-5 from-black/60 to-black/30 backdrop-blur-lg rounded-2xl p-6 md:p-12 flex flex-col gap-8 text-gray-100 shadow-2xl">
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-green-200 via-green-400 via-emerald-500 to-green-800">
+        <section className="my-5 relative max-w-5xl mx-auto mt-5 rounded-2xl p-6 md:p-12 flex flex-col gap-8 text-gray-100">
+            <h2
+                id={id}
+                className="text-3xl sm:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-200 via-green-400 via-green-500 via-emerald-600 to-green-800"
+            >
                 Projects
             </h2>
 
@@ -52,7 +51,6 @@ const Projects: React.FC<ProjectsProps> = ({ sectionOpen }) => {
                     <motion.a
                         key={repo.name}
                         href={repo.html_url}
-                        tabIndex={sectionOpen ? -1 : 0}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-black/30 p-6 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300 flex flex-col gap-3"

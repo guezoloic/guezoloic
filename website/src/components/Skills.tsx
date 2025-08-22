@@ -37,7 +37,6 @@ const skillsData = [
             { name: "Docker", icon: SiIcons.SiDocker },
             { name: "Linux", icon: SiIcons.SiLinux },
             { name: "Zsh", icon: SiIcons.SiZsh },
-            { name: "Modern C++", icon: SiIcons.SiCplusplus },
         ],
     },
     {
@@ -58,13 +57,15 @@ const skillsData = [
     },
 ];
 
-const Skills: React.FC = () => {
+const Skills: React.FC<{ id: string }> = ({ id }) => {
     return (
-        <section className="relative max-w-5xl mx-auto bg-gradient-to-br mt-5 from-black/60 to-black/30 backdrop-blur-lg rounded-2xl p-6 md:p-12 flex flex-col gap-8 text-gray-100 shadow-2xl">
-            <h2 className="text-3xl sm:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-200 via-green-400 via-green-500 via-emerald-600 to-green-800 text-center">
+        <section className="my-5 relative max-w-5xl mx-auto mt-5 rounded-2xl p-6 md:p-12 flex flex-col gap-8 text-gray-100">
+            <h2
+                id={id}
+                className="text-3xl sm:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-200 via-green-400 via-green-500 via-emerald-600 to-green-800"
+            >
                 Skills
             </h2>
-
             <div className="flex flex-col gap-4 w-full">
                 {skillsData.map((section, i) => (
                     <div key={i} className="flex flex-col gap-2">

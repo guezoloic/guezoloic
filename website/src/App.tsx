@@ -11,6 +11,7 @@ import Acknowledgement from "./components/Acknowledge";
 
 import { HomeIcon, CodeBracketIcon, FolderIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
+import SocialLinks from "./components/SocialLink";
 
 function App() {
 	const [menuOpen, setMenuOpen] = useState(false);
@@ -30,7 +31,7 @@ function App() {
 		<div className="relative w-full h-screen">
 			<Three />
 			<Navbar buttons={buttons} sectionOpen={sectionOpen} openNameButton={setMenuOpen} labelname="Links" />
-			<Window open={menuOpen} onClose={() => setMenuOpen(false)}><div></div></Window>
+			<Window open={menuOpen} onClose={() => setMenuOpen(false)}><SocialLinks id="socials"/></Window>
 			{!sectionOpen && (
 				<>
 					<Title />
@@ -39,11 +40,9 @@ function App() {
 							<About id="about" />
 							<Skills id="skills" />
 							<Projects id="projects" />
-						</div>
-						<div className="h-screen flex"></div>
-						<div className="bg-gradient-to-br my-1 from-black/60 to-black/30 backdrop-blur-sm rounded-2xl shadow-2xl p-1">
 							<Acknowledgement id="acknowlegement"/>
 						</div>
+						<div className="h-screen flex"></div>
 					</PageBlock>
 
 				</>

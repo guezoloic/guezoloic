@@ -9,8 +9,23 @@ interface AcknowledgeItem {
 
 const acknowledge: AcknowledgeItem[] = [
     {
-        type: "Models",
-        list: ["Desk: Pedro Belthori"],
+        type: "3D Models",
+        list: [
+            "Desk: Pedro Belthori (Sketchfab)",
+        ],
+    },
+    {
+        type: "Animations",
+        list: [
+            "Mixamo (Adobe) - character animations",
+        ],
+    },
+    {
+        type: "Frameworks & Libraries",
+        list: [
+            "Three.js - WebGL 3D engine",
+            "Framer Motion - React animations",
+        ],
     },
 ];
 

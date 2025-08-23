@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import * as SiIcons from "react-icons/si";
+import Section from "./Section";
 
 const skillsData = [
     {
@@ -59,12 +60,7 @@ const skillsData = [
 
 const Skills: React.FC<{ id: string }> = ({ id }) => {
     return (
-        <section id={id} className="my-5 relative max-w-5xl mx-auto mt-5 rounded-2xl p-6 md:p-12 flex flex-col gap-8 text-gray-100">
-            <h2
-                className="text-3xl sm:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-200 via-green-400 via-green-500 via-emerald-600 to-green-800"
-            >
-                Skills
-            </h2>
+        <Section id={id} title="Skills">
             <div className="flex flex-col gap-4 w-full">
                 {skillsData.map((section, i) => (
                     <div key={i} className="flex flex-col gap-2">
@@ -90,7 +86,7 @@ const Skills: React.FC<{ id: string }> = ({ id }) => {
                     </div>
                 ))}
             </div>
-        </section>
+        </Section>
     );
 };
 

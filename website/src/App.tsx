@@ -1,14 +1,16 @@
 import Navbar from "./components/Navbar";
 import Three from "./components/Three";
-import Section from "./components/Section"
+import Section from "./components/Section";
+import Window from "./components/Window";
 import Projects from "./components/Projects";
 import About from "./components/About";
 import Skills from "./components/Skills";
 import PageBlock from "./components/PageBlock";
+import Title from "./components/Title";
+import Acknowledgement from "./components/Acknowledge";
 
 import { HomeIcon, CodeBracketIcon, FolderIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
-import Title from "./components/Title";
 
 function App() {
 	const [menuOpen, setMenuOpen] = useState(false);
@@ -27,20 +29,23 @@ function App() {
 	return (
 		<div className="relative w-full h-screen">
 			<Three />
-			<Navbar buttons={buttons} sectionOpen={sectionOpen} openNameButton={setMenuOpen} labelname="test" />
-			<Section open={menuOpen} onClose={() => setMenuOpen(false)}><div></div></Section>
+			<Navbar buttons={buttons} sectionOpen={sectionOpen} openNameButton={setMenuOpen} labelname="Links" />
+			<Window open={menuOpen} onClose={() => setMenuOpen(false)}><div></div></Window>
 			{!sectionOpen && (
 				<>
 					<Title />
 					<PageBlock>
-						<div className="bg-gradient-to-br my-5 from-black/60 to-black/30 backdrop-blur-lg rounded-2xl shadow-2xl p-4 md:p-6">
+						<div className="bg-gradient-to-br my-5 from-black/60 to-black/30 backdrop-blur-sm rounded-2xl shadow-2xl p-4 md:p-6">
 							<About id="about" />
 							<Skills id="skills" />
 							<Projects id="projects" />
 						</div>
 						<div className="h-screen flex"></div>
+						<div className="bg-gradient-to-br my-1 from-black/60 to-black/30 backdrop-blur-sm rounded-2xl shadow-2xl p-1">
+							<Acknowledgement id="acknowlegement"/>
+						</div>
 					</PageBlock>
-					<p className="text-white">Desk: Pedro Belthori</p>
+
 				</>
 			)}
 

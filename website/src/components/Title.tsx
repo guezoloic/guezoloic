@@ -4,7 +4,7 @@ import React from "react";
 const Title: React.FC = () => {
   return (
     <motion.section
-      className="flex items-center justify-center m-6 min-h-[51vh] sm:min-h-[65vh] md:min-h-[70vh]"
+      className="flex items-center justify-center m-6 min-h-[55vh] sm:min-h-[65vh] md:min-h-[70vh]"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ amount: 0.2, once: false }}

@@ -1,6 +1,7 @@
 import React, { JSX } from "react";
 import { motion } from "framer-motion";
 import * as SOLID from "@heroicons/react/24/solid";
+import Section from "./Section";
 
 const About: React.FC<{ id: string }> = ({ id }) => {
   const paragraphs: { icon; text: string }[] = [
@@ -35,14 +36,7 @@ const About: React.FC<{ id: string }> = ({ id }) => {
   ];
 
   return (
-    <section id={id} className="my-5 relative max-w-5xl mx-auto mt-5 rounded-2xl p-6 md:p-12 flex flex-col gap-8 text-gray-100">
-
-      <h2
-        className="text-3xl sm:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-200 via-green-400 via-green-500 via-emerald-600 to-green-800"
-      >
-        Hi, I'm Loïc! 👋
-      </h2>
-
+    <Section id={id} title="Hi, I'm Loïc! 👋">
       <div className="grid grid-cols-1 gap-1 w-full">
         {paragraphs.map((paragraph, i) => (
           <motion.div
@@ -58,7 +52,7 @@ const About: React.FC<{ id: string }> = ({ id }) => {
           </motion.div>
         ))}
       </div>
-    </section>
+    </Section>
   );
 };
 

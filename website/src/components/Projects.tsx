@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
+import Section from "./Section";
 
 export interface ProjectProps {
     name: string;
@@ -38,13 +39,7 @@ const Projects: React.FC<{ id: string }> = ({ id }) => {
     }, []);
 
     return (
-        <section id={id} className="my-5 relative max-w-5xl mx-auto mt-5 rounded-2xl p-6 md:p-12 flex flex-col gap-8 text-gray-100">
-            <h2
-                className="text-3xl sm:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-200 via-green-400 via-green-500 via-emerald-600 to-green-800"
-            >
-                Projects
-            </h2>
-
+        <Section id={id} title="Projects">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {repos.map((repo, i) => (
                     <motion.a
@@ -70,7 +65,7 @@ const Projects: React.FC<{ id: string }> = ({ id }) => {
                     </motion.a>
                 ))}
             </div>
-        </section>
+        </Section>
     );
 };
 

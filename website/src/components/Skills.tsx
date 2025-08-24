@@ -2,65 +2,68 @@ import React from "react";
 import { motion } from "framer-motion";
 import * as SiIcons from "react-icons/si";
 import Section from "./Section";
+import { useTranslation } from "react-i18next";
 
-const skillsData = [
-    {
-        title: "Embedded Systems",
-        tags: [
-            { name: "Linux", icon: SiIcons.SiLinux },
-            { name: "Jetson", icon: SiIcons.SiNvidia },
-            { name: "Raspberry Pi", icon: SiIcons.SiRaspberrypi },
-            { name: "STM32", icon: SiIcons.SiStmicroelectronics },
-            { name: "ATtiny85", icon: null },
-        ],
-    },
-    {
-        title: "Low-level & Performance",
-        tags: [
-            { name: "C", icon: SiIcons.SiC },
-            { name: "C++", icon: SiIcons.SiCplusplus },
-            { name: "Rust", icon: SiIcons.SiRust },
-            { name: "SIMD SSE/NEON", icon: null },
-        ],
-    },
-    {
-        title: "AI & Computer Vision",
-        tags: [
-            { name: "Neural Networks", icon: null },
-            { name: "OpenCV", icon: SiIcons.SiOpencv },
-            { name: "Jetson Deployment", icon: SiIcons.SiNvidia },
-        ],
-    },
-    {
-        title: "Software Engineering",
-        tags: [
-            { name: "Git", icon: SiIcons.SiGit },
-            { name: "Docker", icon: SiIcons.SiDocker },
-            { name: "Linux", icon: SiIcons.SiLinux },
-            { name: "Zsh", icon: SiIcons.SiZsh },
-        ],
-    },
-    {
-        title: "Servers",
-        tags: [
-            { name: "Proxmox", icon: SiIcons.SiProxmox },
-            { name: "Linux Server", icon: SiIcons.SiLinux },
-            { name: "Docker", icon: SiIcons.SiDocker },
-            { name: "Automation", icon: null },
-        ],
-    },
-    {
-        title: "Extra",
-        tags: [
-            { name: "Three.js", icon: SiIcons.SiThreedotjs },
-            { name: "Ubuntu Server", icon: SiIcons.SiUbuntu },
-        ],
-    },
-];
 
 const Skills: React.FC<{ id: string }> = ({ id }) => {
+    const { t } = useTranslation();
+    
+    const skillsData = [
+        {
+            title: t("skills.content.0"),
+            tags: [
+                { name: "Linux", icon: SiIcons.SiLinux },
+                { name: "Jetson", icon: SiIcons.SiNvidia },
+                { name: "Raspberry Pi", icon: SiIcons.SiRaspberrypi },
+                { name: "STM32", icon: SiIcons.SiStmicroelectronics },
+                { name: "ATtiny85", icon: null },
+            ],
+        },
+        {
+            title: t("skills.content.1"),
+            tags: [
+                { name: "C", icon: SiIcons.SiC },
+                { name: "C++", icon: SiIcons.SiCplusplus },
+                { name: "Rust", icon: SiIcons.SiRust },
+                { name: "SIMD SSE/NEON", icon: null },
+            ],
+        },
+        {
+            title: t("skills.content.2"),
+            tags: [
+                { name: "Neural Networks", icon: null },
+                { name: "OpenCV", icon: SiIcons.SiOpencv },
+                { name: "Jetson Deployment", icon: SiIcons.SiNvidia },
+            ],
+        },
+        {
+            title: t("skills.content.3"),
+            tags: [
+                { name: "Git", icon: SiIcons.SiGit },
+                { name: "Docker", icon: SiIcons.SiDocker },
+                { name: "Linux", icon: SiIcons.SiLinux },
+                { name: "Zsh", icon: SiIcons.SiZsh },
+            ],
+        },
+        {
+            title: t("skills.content.4"),
+            tags: [
+                { name: "Proxmox", icon: SiIcons.SiProxmox },
+                { name: "Linux Server", icon: SiIcons.SiLinux },
+                { name: "Docker", icon: SiIcons.SiDocker },
+                { name: "Automation", icon: null },
+            ],
+        },
+        {
+            title: t("skills.content.5"),
+            tags: [
+                { name: "Three.js", icon: SiIcons.SiThreedotjs },
+                { name: "Ubuntu Server", icon: SiIcons.SiUbuntu },
+            ],
+        },
+    ];
     return (
-        <Section id={id} title="Skills">
+        <Section id={id} title={t("skills.title")}>
             <div className="flex flex-col gap-4 w-full">
                 {skillsData.map((section, i) => (
                     <div key={i} className="flex flex-col gap-2">

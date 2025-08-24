@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 import Section from "./Section";
+import { useTranslation } from "react-i18next";
 
 interface AcknowledgeItem {
     type: string;
@@ -30,8 +31,10 @@ const acknowledge: AcknowledgeItem[] = [
 ];
 
 const Acknowledgement: React.FC<{ id: string }> = ({ id }) => {
+      const { t } = useTranslation();
+
     return (
-        <Section id={id} title="Acknowledgements">
+        <Section id={id} title={t("acknowledge.label")}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {acknowledge.map((category, i) => (
                     <motion.div

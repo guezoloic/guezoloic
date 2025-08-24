@@ -1,10 +1,13 @@
 import { motion } from "framer-motion";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const Title: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <motion.section
-      className="flex items-center justify-center m-6 min-h-[55vh] sm:min-h-[65vh] md:min-h-[70vh]"
+      className="flex items-center justify-center m-6 min-h-[57vh] sm:min-h-[65vh] md:min-h-[70vh]"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ amount: 0.2, once: false }}
@@ -20,7 +23,7 @@ const Title: React.FC = () => {
             viewport={{ once: false, amount: 0.5 }}
             transition={{ duration: 0.3 }}
           >
-            <h3>Hello There! 👋</h3>
+            <h3>{t("me.title")}</h3>
             <p className="text-sm font-medium text-gray-400">GUEZO Loïc</p>
           </motion.div>
 

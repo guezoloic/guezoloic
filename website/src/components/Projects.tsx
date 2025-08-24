@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import Section from "./Section";
+import { useTranslation } from "react-i18next";
 
 export interface ProjectProps {
     name: string;
@@ -38,8 +39,10 @@ const Projects: React.FC<{ id: string }> = ({ id }) => {
         fetchRepos();
     }, []);
 
+    const { t } = useTranslation();
+
     return (
-        <Section id={id} title="Projects">
+        <Section id={id} title={t("projects.title")}>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {repos.map((repo, i) => (
                     <motion.a

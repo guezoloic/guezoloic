@@ -2,6 +2,7 @@ import React from "react";
 import Section from "./Section";
 import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
 import { SiHuggingface, SiLeetcode } from "react-icons/si";
+import { useTranslation } from "react-i18next";
 
 interface SocialLink {
     name: string;
@@ -18,8 +19,9 @@ const socialLinks: SocialLink[] = [
 ];
 
 const SocialLinks: React.FC<{ id: string }> = ({ id }) => {
+    const { t } = useTranslation();
     return (
-        <Section id={id} title="Socials">
+        <Section id={id} title={t("links.label")}>
             <div className="flex flex-wrap gap-4 justify-center">
                 {socialLinks.map((link, i) => (
                     <a

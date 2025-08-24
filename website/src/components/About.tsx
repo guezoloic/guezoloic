@@ -1,42 +1,24 @@
 import React, { JSX } from "react";
 import { motion } from "framer-motion";
 import * as SOLID from "@heroicons/react/24/solid";
+import { useTranslation } from 'react-i18next';
 import Section from "./Section";
 
 const About: React.FC<{ id: string }> = ({ id }) => {
+  const { t } = useTranslation();
+  
   const paragraphs: { icon; text: string }[] = [
-    {
-      icon: SOLID.LightBulbIcon,
-      text: "Curious by nature, I love exploring what really happens under the hood of a computer."
-    },
-    {
-      icon: SOLID.CodeBracketIcon,
-      text: "I started with simple Python programs and gradually discovered my fascination for low-level computing."
-    },
-    {
-      icon: SOLID.CpuChipIcon,
-      text: "Learning Intel x86 assembly at School and working with retro-computing kits, I realized I truly enjoy building things from scratch and understanding them at the most fundamental level."
-    },
-    {
-      icon: SOLID.ChartPieIcon,
-      text: "Over time, I specialized in low-level programming (C, C++, Rust, SIMD) and embedded systems (STM32, Jetson, Raspberry Pi, ATtiny85)."
-    },
-    {
-      icon: SOLID.WrenchScrewdriverIcon,
-      text: "I enjoy creating efficient solutions, from custom math libraries with SSE/NEON to fine-tuning device trees for hardware integration."
-    },
-    {
-      icon: SOLID.RocketLaunchIcon,
-      text: "Recently, I have combined this expertise with modern innovation by deploying AI and computer vision models on embedded devices and experimenting with edge computing."
-    },
-    {
-      icon: SOLID.ServerStackIcon,
-      text: "Beyond embedded engineering, I also work on servers, AI projects, and game engines, balancing hardware and software to make each project both challenging and rewarding."
-    }
+    { icon: SOLID.LightBulbIcon, text: t('about.content.0') },
+    { icon: SOLID.CodeBracketIcon, text: t('about.content.1') },
+    { icon: SOLID.CpuChipIcon, text: t('about.content.2') },
+    { icon: SOLID.ChartPieIcon, text: t('about.content.3') },
+    { icon: SOLID.WrenchScrewdriverIcon, text: t('about.content.4') },
+    { icon: SOLID.RocketLaunchIcon, text: t('about.content.5') },
+    { icon: SOLID.ServerStackIcon, text: t('about.content.6') }
   ];
 
   return (
-    <Section id={id} title="Hi, I'm Loïc! 👋">
+    <Section id={id} title={t('about.title')}>
       <div className="grid grid-cols-1 gap-1 w-full">
         {paragraphs.map((paragraph, i) => (
           <motion.div

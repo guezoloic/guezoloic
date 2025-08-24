@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 type Button = {
   label: string;
@@ -14,6 +15,8 @@ type NavbarProps = {
 };
 
 const Navbar: React.FC<NavbarProps> = ({ buttons, sectionOpen, openNameButton, labelname }) => {
+  const { t } = useTranslation();
+
   return (
     <nav className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-3">
       <div className="relative group">
@@ -28,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ buttons, sectionOpen, openNameButton, l
               GUEZO Loïc
             </span>
             <span className="text-xs md:text-sm text-gray-300 font-light">
-              IT Student
+              {t("me.career")}
             </span>
           </div>
         </button>

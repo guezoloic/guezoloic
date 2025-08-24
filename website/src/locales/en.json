@@ -1,0 +1,54 @@
+{
+    "me":
+    {
+        "title": "Hello There! 👋",
+        "career": "IT Student"
+    },
+
+    "about": 
+    {  
+        "label": "About",
+        "title": "Hi, I'm Loïc! 👋",
+        "content": 
+        [
+            "Curious by nature, I love exploring what really happens under the hood of a computer.",
+            "I started with simple Python programs and gradually discovered my fascination for low-level computing.",
+            "Learning Intel x86 assembly at School and working with retro-computing kits, I realized I truly enjoy building things from scratch and understanding them at the most fundamental level.",
+            "Over time, I specialized in low-level programming (C, C++, Rust, SIMD) and embedded systems (STM32, Jetson, Raspberry Pi, ATtiny85).",
+            "I enjoy creating efficient solutions, from custom math libraries with SSE/NEON to fine-tuning device trees for hardware integration.",
+            "Recently, I have combined this expertise with modern innovation by deploying AI and computer vision models on embedded devices and experimenting with edge computing.",
+            "Beyond embedded engineering, I also work on servers, AI projects, and game engines, balancing hardware and software to make each project both challenging and rewarding."
+        ]   
+    },
+
+    "skills":
+    {
+        "label": "Skills",
+        "title": "My Skills",
+        "content":
+        [
+            "Embedded Systems",
+            "Low-level & Performance",
+            "AI & Computer Vision",
+            "Software Engineering",
+            "Servers",
+            "Extra"
+        ]
+    },
+
+    "projects":
+    {
+        "label": "Projects",
+        "title": "My Projects"
+    },
+
+    "acknowledge":
+    {
+        "label": "Acknowledgement"
+    },
+
+    "links":
+    {
+        "label": "Links"
+    }
+}

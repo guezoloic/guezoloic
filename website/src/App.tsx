@@ -33,7 +33,7 @@ function App() {
 	return (
 		<div className="relative w-full h-screen">
 			<Three />
-			<Navbar buttons={buttons} sectionOpen={sectionOpen} openNameButton={setMenuOpen} labelname="Links" />
+			<Navbar buttons={buttons} sectionOpen={sectionOpen} openNameButton={setMenuOpen} labelname={t("links.label")} />
 			<Window open={menuOpen} onClose={() => setMenuOpen(false)}>
 				<SocialLinks id="socials" />
 				<Acknowledgement id="acknowlegement" />

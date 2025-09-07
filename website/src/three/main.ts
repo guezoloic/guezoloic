@@ -3,14 +3,17 @@ import Animation from "./animation";
 import AnimationQueue from "./animQueue";
 import Model from "./model";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 import bindScrollToScrollEffects from "./scroll";
 import Camera from "./camera";
 
 export class Main {
-    public scene: THREE.Scene;
-    public renderer: THREE.WebGLRenderer;
-    public camera: THREE.PerspectiveCamera;
+    private scene: THREE.Scene;
+    private renderer: THREE.WebGLRenderer;
+    private camera: THREE.PerspectiveCamera;
+
+    private controls: OrbitControls; 
 
     private clock: THREE.Clock;
     private loader: GLTFLoader;
@@ -31,18 +34,23 @@ export class Main {
             1000
         );
 
+        
         this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-
+        
         this.container = container ?? document.body;
         this.container.appendChild(this.renderer.domElement);
-
+        
         const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
         this.scene.add(ambientLight);
-
+        
         const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
         directionalLight.position.set(5, 5, 5);
         this.scene.add(directionalLight);
+        
+        this.controls = new OrbitControls(this.camera, this.container);
+        this.controls.enableZoom = false;
+        this.controls.enablePan = false;
 
         this.clock = new THREE.Clock();
 
@@ -104,6 +112,7 @@ export class Main {
 
         const delta = this.clock.getDelta();
         if (this.animation) this.animation.update(delta);
+        this.controls.update();
         this.renderer.render(this.scene, this.camera);
     }
 

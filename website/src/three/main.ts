@@ -13,7 +13,7 @@ export class Main {
     private renderer: THREE.WebGLRenderer;
     private camera: THREE.PerspectiveCamera;
 
-    private controls: OrbitControls; 
+    private controls: OrbitControls;
 
     private clock: THREE.Clock;
     private loader: GLTFLoader;
@@ -34,23 +34,35 @@ export class Main {
             1000
         );
 
-        
+
         this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        
+
         this.container = container ?? document.body;
         this.container.appendChild(this.renderer.domElement);
-        
+
         const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
         this.scene.add(ambientLight);
-        
+
         const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
         directionalLight.position.set(5, 5, 5);
         this.scene.add(directionalLight);
-        
+
         this.controls = new OrbitControls(this.camera, this.container);
+        this.controls.minPolarAngle = Math.PI / 2;
+        this.controls.maxPolarAngle = Math.PI / 2;
         this.controls.enableZoom = false;
         this.controls.enablePan = false;
+
+        this.renderer.domElement.style.touchAction = 'pan-y';
+
+        this.controls.update = (() => {
+            const originalUpdate = this.controls.update.bind(this.controls);
+            return function () {
+                originalUpdate();
+                this.controls.getPolarAngle = () => Math.PI / 2;
+            }.bind(this);
+        })();
 
         this.clock = new THREE.Clock();
 
@@ -77,17 +89,17 @@ export class Main {
             baseModel.position.y -= size.y * 0.3;
         });
         cameraBaseModel.positionCamera();
-        
+
         const cameraDeskModel = new Camera(this.camera, deskModel);
-        
+
         cameraDeskModel.centerCamera((box, size, center) => {
             deskModel.rotation.y = Math.PI / 2;
             const scaleFactor = 0.01;
             deskModel.scale.set(scaleFactor, scaleFactor, scaleFactor);
-            
+
             const deskBox = new THREE.Box3().setFromObject(deskModel);
             const deskCenter = new THREE.Vector3();
-            
+
             deskBox.getCenter(center);
             deskModel.position.sub(center);
 
@@ -98,7 +110,7 @@ export class Main {
         // Animation
         this.animation = new Animation(baseModel, this.loader, 'animations/idle.glb');
         this.animQueue = new AnimationQueue(this.animation);
-        
+
         // run animations
         const wavingAction = await this.animation.loadAnimation('animations/waving.glb');
         this.animQueue.onqueue(wavingAction);

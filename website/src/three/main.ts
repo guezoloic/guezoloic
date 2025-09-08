@@ -24,7 +24,11 @@ export class Main {
 
     private container: HTMLElement;
 
+    private isMobile: boolean;
+
     constructor(container?: HTMLElement, loadingManager?: THREE.LoadingManager) {
+        this.isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ? false : true;
+
         this.scene = new THREE.Scene();
 
         this.camera = new THREE.PerspectiveCamera(
@@ -48,21 +52,15 @@ export class Main {
         directionalLight.position.set(5, 5, 5);
         this.scene.add(directionalLight);
 
-        this.controls = new OrbitControls(this.camera, this.container);
-        this.controls.minPolarAngle = Math.PI / 2;
-        this.controls.maxPolarAngle = Math.PI / 2;
-        this.controls.enableZoom = false;
-        this.controls.enablePan = false;
+        if (this.isMobile) {
+            this.controls = new OrbitControls(this.camera, this.container);
+            this.controls.minPolarAngle = Math.PI / 2;
+            this.controls.maxPolarAngle = Math.PI / 2;
+            this.controls.enableZoom = false;
+            this.controls.enablePan = false;
 
-        this.renderer.domElement.style.touchAction = 'pan-y';
-
-        this.controls.update = (() => {
-            const originalUpdate = this.controls.update.bind(this.controls);
-            return function () {
-                originalUpdate();
-                this.controls.getPolarAngle = () => Math.PI / 2;
-            }.bind(this);
-        })();
+            this.renderer.domElement.style.touchAction = 'pan-y';
+        }
 
         this.clock = new THREE.Clock();
 
@@ -124,7 +122,7 @@ export class Main {
 
         const delta = this.clock.getDelta();
         if (this.animation) this.animation.update(delta);
-        this.controls.update();
+        if (this.isMobile) this.controls.update();
         this.renderer.render(this.scene, this.camera);
     }
 

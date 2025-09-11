@@ -4,7 +4,7 @@ const Section: React.FC<{ children: JSX.Element, title: string, id: string }> = 
     return (
         <section
             id={id}
-            className="my-5 relative max-w-5xl mx-auto mt-5 rounded-2xl p-6 md:p-12 flex flex-col gap-8 text-gray-100"
+            className="my-3 relative max-w-5xl mx-auto mt-5 rounded-2xl flex flex-col gap-8 text-gray-100"
         >
             <h2
                 className="text-3xl sm:text-5xl font-extrabold bg-clip-text text-transparent 

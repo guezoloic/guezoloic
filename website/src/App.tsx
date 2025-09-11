@@ -4,9 +4,7 @@ import Window from "./components/Window";
 import Projects from "./components/Projects";
 import About from "./components/About";
 import Skills from "./components/Skills";
-import PageBlock from "./components/PageBlock";
 import Title from "./components/Title";
-import Acknowledgement from "./components/Acknowledge";
 import SocialLinks from "./components/SocialLink";
 
 import { HomeIcon, CodeBracketIcon, FolderIcon } from "@heroicons/react/24/solid";
@@ -19,40 +17,41 @@ function App() {
 	const { t } = useTranslation();
 
 	const [menuOpen, setMenuOpen] = useState(false);
+	const [aboutOpen, setAboutOpen] = useState(false);
+	const [skillsOpen, setSkillsOpen] = useState(false);
+	const [projectsOpen, setProjectsOpen] = useState(false);
+
 	const scrollFunction = (label: string) =>
 		document.getElementById(label)?.scrollIntoView({ behavior: "smooth" });
 
 	const buttons = [
-		{ label: t("about.label"), icon: HomeIcon, action: () => scrollFunction("about"), },
-		{ label: t("skills.label"), icon: CodeBracketIcon, action: () => scrollFunction("skills"), },
-		{ label: t("projects.label"), icon: FolderIcon, action: () => scrollFunction("projects"), },
+		{ label: t("about.label"), icon: HomeIcon, action: () => setAboutOpen(true), },
+		{ label: t("skills.label"), icon: CodeBracketIcon, action: () => setSkillsOpen(true), },
+		{ label: t("projects.label"), icon: FolderIcon, action: () => setProjectsOpen(true), },
 	];
 
-	const sectionOpen = menuOpen;
+	const sectionOpen = menuOpen || aboutOpen || skillsOpen || projectsOpen;
+
+	const closeAllSections = () => {
+		setMenuOpen(false);
+		setAboutOpen(false);
+		setSkillsOpen(false);
+		setProjectsOpen(false);
+	};
 
 	return (
 		<div className="relative w-full h-screen">
+			<Title />
 			<Three />
-			<Navbar buttons={buttons} sectionOpen={sectionOpen} openNameButton={setMenuOpen} labelname={t("links.label")} />
-			<Window open={menuOpen} onClose={() => setMenuOpen(false)}>
-				<SocialLinks id="socials" />
-				<Acknowledgement id="acknowlegement" />
-			</Window>
-			{!sectionOpen && (
-				<>
-					<Title />
-					<PageBlock>
-						<div className="bg-gradient-to-br my-5 from-black/60 to-black/30 backdrop-blur-sm rounded-2xl shadow-2xl p-4 md:p-6">
-							<About id="about" />
-							<Skills id="skills" />
-							<Projects id="projects" />
-						</div>
-						<div className="h-screen flex"></div>
-					</PageBlock>
-
-				</>
-			)}
-
+			<Navbar buttons={buttons} 
+					sectionOpen={sectionOpen} 
+					openNameButton={setMenuOpen} 
+					closeAllSection={closeAllSections} 
+					labelname={t("links.label")} />
+			<Window open={menuOpen} onClose={() => setMenuOpen(false)}><SocialLinks id="socials" /></Window>
+			<Window open={aboutOpen} onClose={() => setAboutOpen(false)}> <About id="about" /></Window>
+			<Window open={skillsOpen} onClose={() => setSkillsOpen(false)}> <Skills id="skills" /></Window>
+			<Window open={projectsOpen} onClose={() => setProjectsOpen(false)}> <Projects id="projects" /></Window>
 		</div>
 	);
 }

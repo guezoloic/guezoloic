@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import { motion, Variants } from "framer-motion";
 
 type Button = {
   label: string;
@@ -16,22 +17,87 @@ type NavbarProps = {
   labelname: string;
 };
 
+
+const XVariants: Variants = {
+  initial: {
+    scaleY: 0.8,
+    scaleX: 5,
+    opacity: 0.7,
+  },
+  animate: {
+    scaleY: 1,
+    scaleX: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.34, 1.56, 0.64, 1],
+      scaleY: {
+        duration: 0.7,
+        ease: [0.175, 0.885, 0.32, 1.275]
+      }
+    }
+  },
+  hover: {
+    scale: 1.1,
+    backgroundColor: "rgba(255, 255, 255, 0.25)",
+    transition: {
+      duration: 0.2,
+      ease: [0.4, 0, 0.2, 1.275]
+    }
+  },
+  tap: {
+    scale: 0.95,
+    transition: {
+      duration: 0.1
+    }
+  }
+};
+
+const navVariants: Variants = {
+  initial: {
+    scaleY: 0.8,
+    scaleX: 0.2,
+    opacity: 0.7,
+  },
+  animate: {
+    scaleY: 1,
+    scaleX: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.34, 1.56, 0.64, 1],
+      scaleX: {
+        duration: 0.7,
+        ease: [0.175, 0.885, 0.32, 1.275]
+      }
+    }
+  }
+};
+
 const Navbar: React.FC<NavbarProps> = ({ buttons, sectionOpen, openNameButton, labelname, closeAllSection }) => {
   const { t } = useTranslation();
 
   return (
     <nav className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-3 z-100">
       {sectionOpen ? (
-        <button
-           onClick={closeAllSection}
-          className="cursor-pointer flex items-center justify-center rounded-full backdrop-blur-lg bg-black/30 shadow-md
-                       w-12 h-12 md:w-14 md:h-14 text-white transition-all duration-200 ease-out
-                       hover:scale-110 hover:bg-white/25 active:scale-95 active:shadow-md"
+        <motion.button
+          onClick={closeAllSection}
+          className="cursor-pointer flex items-center justify-center rounded-full backdrop-blur-lg bg-black/30 shadow-md w-12 h-12 md:w-14 md:h-14 text-white"
+          variants={XVariants}
+          initial="initial"
+          animate="animate"
+          whileHover="hover"
+          whileTap="tap"
         >
           <XMarkIcon className="w-8 h-8 text-white" />
-        </button>
+        </motion.button>
       ) : (
-        <>
+        <motion.div
+          className="flex items-center gap-3"
+          variants={navVariants}
+          initial="initial"
+          animate="animate"
+        >
           <div className="relative group">
             <button
               onClick={() => openNameButton(true)}
@@ -69,7 +135,7 @@ const Navbar: React.FC<NavbarProps> = ({ buttons, sectionOpen, openNameButton, l
               </div>
             ))}
           </div>
-        </>
+        </motion.div>
       )}
     </nav>
   );

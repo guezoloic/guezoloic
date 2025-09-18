@@ -7,7 +7,7 @@ import Section from "./Section";
 const About: React.FC<{ id: string }> = ({ id }) => {
   const { t } = useTranslation();
   
-  const paragraphs: { icon; text: string }[] = [
+  const paragraphs: { icon: any; text: string }[] = [
     { icon: SOLID.LightBulbIcon, text: t('about.content.0') },
     { icon: SOLID.CodeBracketIcon, text: t('about.content.1') },
     { icon: SOLID.CpuChipIcon, text: t('about.content.2') },

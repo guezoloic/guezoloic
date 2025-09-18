@@ -1,54 +1,46 @@
 {
-    "me":
-    {
-        "title": "Salut ! 👋",
+    "me": {
+        "title": "Bonjour ! 👋",
         "career": "Étudiant en informatique"
     },
-
-    "about": 
-    {  
+    "about": {
         "label": "À propos",
-        "title": "Salut, je suis Loïc ! 👋",
-        "content": 
-        [
-            "Par nature curieux, j'adore explorer ce qui se passe vraiment sous le capot d'un ordinateur.",
-            "J'ai commencé avec de simples programmes Python et j'ai progressivement découvert ma fascination pour le bas niveau.",
-            "En apprenant l'assembleur Intel x86 à l'école et en travaillant sur des kits rétro-informatique, j'ai réalisé que j'aime vraiment construire des choses de zéro et les comprendre à un niveau fondamental.",
-            "Au fil du temps, je me suis spécialisé en programmation bas niveau (C, C++, Rust, SIMD) et systèmes embarqués (STM32, Jetson, Raspberry Pi, ATtiny85).",
-            "J'aime créer des solutions efficaces, des bibliothèques mathématiques personnalisées avec SSE/NEON à l'optimisation des device trees pour l'intégration matérielle.",
-            "Récemment, j'ai combiné cette expertise avec l'innovation moderne en déployant des modèles d'IA et de vision par ordinateur sur des dispositifs embarqués et en expérimentant l'edge computing.",
-            "Au-delà de l'ingénierie embarquée, je travaille également sur des serveurs, projets IA et moteurs de jeu, équilibrant hardware et software pour rendre chaque projet stimulant et gratifiant."
-        ]   
-    },
-
-    "skills":
-    {
-        "label": "Compétences",
-        "title": "Mes Compétences",
-        "content":
-        [
-            "Systèmes embarqués",
-            "Bas niveau & Performance",
-            "IA & Vision par ordinateur",
-            "Génie logiciel",
-            "Serveurs",
-            "Divers"
+        "title": "Bonjour, je suis Loïc ! 👋",
+        "content": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
         ]
     },
-
-    "projects":
-    {
+    "skills": {
+        "label": "Compétences",
+        "title": "Mes Compétences",
+        "content": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "projects": {
         "label": "Projets",
         "title": "Mes Projets"
     },
-
-    "acknowledge":
-    {
-        "label": "Remerciements"
-    },
-
-    "links":
-    {
-        "label": "Liens"
+    "links": {
+        "label": "Liens",
+        "title": "Liens",
+        "descriptions": [
+            "",
+            "",
+            "",
+            ""
+        ]
     }
 }

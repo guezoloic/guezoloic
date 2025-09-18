@@ -15,8 +15,6 @@ const Skills: React.FC<{ id: string }> = ({ id }) => {
                 { name: "Linux", icon: SiIcons.SiLinux },
                 { name: "Jetson", icon: SiIcons.SiNvidia },
                 { name: "Raspberry Pi", icon: SiIcons.SiRaspberrypi },
-                { name: "STM32", icon: SiIcons.SiStmicroelectronics },
-                { name: "ATtiny85", icon: null },
             ],
         },
         {
@@ -25,15 +23,13 @@ const Skills: React.FC<{ id: string }> = ({ id }) => {
                 { name: "C", icon: SiIcons.SiC },
                 { name: "C++", icon: SiIcons.SiCplusplus },
                 { name: "Rust", icon: SiIcons.SiRust },
-                { name: "SIMD SSE/NEON", icon: null },
+                { name: "Python", icon: SiIcons.SiPython },
             ],
         },
         {
             title: t("skills.content.2"),
             tags: [
-                { name: "Neural Networks", icon: null },
                 { name: "OpenCV", icon: SiIcons.SiOpencv },
-                { name: "Jetson Deployment", icon: SiIcons.SiNvidia },
             ],
         },
         {
@@ -42,7 +38,6 @@ const Skills: React.FC<{ id: string }> = ({ id }) => {
                 { name: "Git", icon: SiIcons.SiGit },
                 { name: "Docker", icon: SiIcons.SiDocker },
                 { name: "Linux", icon: SiIcons.SiLinux },
-                { name: "Zsh", icon: SiIcons.SiZsh },
             ],
         },
         {
@@ -51,7 +46,6 @@ const Skills: React.FC<{ id: string }> = ({ id }) => {
                 { name: "Proxmox", icon: SiIcons.SiProxmox },
                 { name: "Linux Server", icon: SiIcons.SiLinux },
                 { name: "Docker", icon: SiIcons.SiDocker },
-                { name: "Automation", icon: null },
             ],
         },
         {

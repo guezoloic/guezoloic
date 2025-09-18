@@ -1,7 +1,11 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { JSX } from "react";
 
-const PageBlock = ({ children }) => {
+interface PageBlockProps {
+  children: React.ReactNode;
+}
+
+const PageBlock: React.FC<PageBlockProps> = ({ children }) => {
   const isMobile = window.innerWidth < 768;
   const viewportAmount = isMobile ? 0.1 : 0.2;
 

@@ -5,7 +5,7 @@ import Projects from "./components/Projects";
 import About from "./components/About";
 import Skills from "./components/Skills";
 import Title from "./components/Title";
-import SocialLinks from "./components/SocialLink";
+import Social from "./components/Social";
 
 import { HomeIcon, CodeBracketIcon, FolderIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
@@ -48,7 +48,7 @@ function App() {
 					openNameButton={setMenuOpen} 
 					closeAllSection={closeAllSections} 
 					labelname={t("links.label")} />
-			<Window open={menuOpen} onClose={() => setMenuOpen(false)}><SocialLinks id="socials" /></Window>
+			<Window open={menuOpen} onClose={() => setMenuOpen(false)}><Social id="socials" /></Window>
 			<Window open={aboutOpen} onClose={() => setAboutOpen(false)}> <About id="about" /></Window>
 			<Window open={skillsOpen} onClose={() => setSkillsOpen(false)}> <Skills id="skills" /></Window>
 			<Window open={projectsOpen} onClose={() => setProjectsOpen(false)}> <Projects id="projects" /></Window>

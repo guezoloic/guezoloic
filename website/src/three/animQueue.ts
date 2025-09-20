@@ -1,14 +1,8 @@
 import * as THREE from "three";
 import Animation from "./animation";
+import assets from "../json/assets.json"
 
-const animations = [
-    "animations/StandingW_BriefcaseIdle.glb",
-    "animations/Acknowledging.glb",
-    "animations/ArmStretching.glb",
-    "animations/OffensiveIdle.glb",
-    "animations/ThoughtfulHeadShake.glb",
-    "animations/DwarfIdle.glb"
-];
+const ANIMATION_ASSETS = assets.animations; 
 
 export default class AnimationQueue {
     private animation: Animation;
@@ -49,11 +43,11 @@ export default class AnimationQueue {
 
         if (!this.queue.length) this.queue.push(this.animation.getBasicAction());
 
-        const nextAction = this.queue.shift()!;
-        nextAction.reset();
-        nextAction.setLoop(THREE.LoopOnce, 1);
-        nextAction.clampWhenFinished = true;
-        nextAction.fadeIn(this.animation.getFadein()).play();
+        const NEXTACTION = this.queue.shift()!;
+        NEXTACTION.reset();
+        NEXTACTION.setLoop(THREE.LoopOnce, 1);
+        NEXTACTION.clampWhenFinished = true;
+        NEXTACTION.fadeIn(this.animation.getFadein()).play();
 
         const onFinish = (e: any) => {
             if (e.action === this.currentAction) {
@@ -64,7 +58,7 @@ export default class AnimationQueue {
             }
         };
 
-        this.currentAction = nextAction;
+        this.currentAction = NEXTACTION;
         this.mixer.addEventListener("finished", onFinish);
     }
 
@@ -73,8 +67,8 @@ export default class AnimationQueue {
 
         this.randomIntervalId = window.setInterval(async () => {
             if (!this.mixer) return;
-            const randomIndex = Math.floor(Math.random() * animations.length);
-            this.onqueue(await this.animation.loadAnimation(animations[randomIndex]));
+            const RANDOMINDEX = Math.floor(Math.random() * ANIMATION_ASSETS.length);
+            this.onqueue(await this.animation.loadAnimation(ANIMATION_ASSETS[RANDOMINDEX]));
         }, 30_000);
     }
 

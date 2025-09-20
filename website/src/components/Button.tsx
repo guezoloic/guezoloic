@@ -1,0 +1,36 @@
+import { ReactNode } from "react";
+
+type ButtonProps = {
+    children: ReactNode;
+    onClick?: () => void;
+    label: string;
+    variant?: "icon" | "text";
+};
+
+export default function Button({ children, onClick, label, variant = "icon" }: ButtonProps) {
+    const BASECLASS = "cursor-pointer flex items-center justify-center backdrop-blur-lg         \
+                        bg-black/30 shadow-md text-white transition-all duration-200 ease-out   \
+                        hover:scale-110 hover:bg-white/25 active:scale-95 active:shadow-md";
+
+
+    // dictionary to choose if it's a icon or text button
+    const variants: Record<typeof variant, string> = {
+        icon: "rounded-full w-12 h-12 md:w-14 md:h-14",
+        text: "rounded-3xl px-4 h-12 md:h-14 md:px-6 max-w-max",
+    };
+
+    return (
+        <div className="relative group">
+            <button onClick={onClick} aria-label={label} className={`${BASECLASS} ${variants[variant]}`}>
+                {children}
+            </button>
+            {label && (
+                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 
+                                rounded-md text-xs text-white bg-black/80 opacity-0 
+                                group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    {label}
+                </span>
+            )}
+        </div>
+    );
+}

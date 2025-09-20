@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import React from "react";
 import { useTranslation } from "react-i18next";
 
-const Title: React.FC = () => {
+import content from "../json/content.json"
+
+export default function Title() {
   const { t } = useTranslation();
 
   return (
@@ -22,8 +23,8 @@ const Title: React.FC = () => {
           viewport={{ once: false, amount: 0.5 }}
           transition={{ duration: 0.3 }}
         >
-          <h3>{t("me.title")}</h3>
-          <p className="text-sm font-medium text-gray-400">GUEZO Loïc</p>
+          <h3>{t(content.career)}</h3>
+          <p className="text-sm font-medium text-gray-400">{content.name}</p>
         </motion.div>
 
         <motion.div
@@ -33,8 +34,8 @@ const Title: React.FC = () => {
           transition={{ duration: 0.3 }}
         >
           <img
-            src="/images/guezoloic.png"
-            alt="Loïc"
+            src={content.profile_image}
+            alt={content.name}
             loading="lazy"
             className="w-auto h-17 md:h-20 rounded-full object-cover shadow-2xl border-4 border-white/20 transform transition-transform duration-500 hover:scale-105 self-start block"
             width={96}
@@ -46,5 +47,3 @@ const Title: React.FC = () => {
     </motion.section>
   );
 };
-
-export default Title;

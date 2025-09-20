@@ -9,10 +9,10 @@ export default class Model {
     }
 
     public async init(model_url: string, scene: THREE.Scene, isVisible: boolean = true): Promise<THREE.Object3D> {
-        const model = await this.loadModel(model_url);
-        model.visible = isVisible;
-        scene.add(model);
-        return model;
+        const MODEL = await this.loadModel(`assets/${model_url}`);
+        MODEL.visible = isVisible;
+        scene.add(MODEL);
+        return MODEL;
     }
 
     public loadModel(model_url: string): Promise<THREE.Object3D> {

@@ -6,7 +6,7 @@ export default class Animation {
     private loader: GLTFLoader;
 
     private actions: Map<string, THREE.AnimationAction> = new Map();
-    private basicAction: THREE.AnimationAction;
+    private basicAction!: THREE.AnimationAction;
 
     private fadein: number;
     private fadeout: number;
@@ -26,6 +26,7 @@ export default class Animation {
     }
 
     public loadAnimation(url: string): Promise<THREE.AnimationAction> {
+        url = `assets/${url}`;
         return new Promise((resolve, reject) => {
             if (this.actions.has(url)) return resolve(this.actions.get(url)!);
             this.loader.load(
@@ -52,8 +53,10 @@ export default class Animation {
         });
     }
 
-    public async setBasicAction(url: string) {
-        this.basicAction = await this.loadAnimation(url);
+    public setBasicAction(url: string) {
+        this.loadAnimation(url).then(action => {
+            this.basicAction = action;
+        });
     }
 
     public getBasicAction(): THREE.AnimationAction {

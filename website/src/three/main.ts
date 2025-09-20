@@ -1,45 +1,54 @@
 import * as THREE from "three";
-import Animation from "./animation";
-import AnimationQueue from "./animQueue";
-import Model from "./model";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-import bindScrollToScrollEffects from "./scroll";
+import Model from "./model";
 import Camera from "./camera";
+import Animation from "./animation";
 
-export class Main {
-    private scene: THREE.Scene;
-    private renderer: THREE.WebGLRenderer;
-    private camera: THREE.PerspectiveCamera;
+import assets from "../json/assets.json"
+import AnimationQueue from "./animQueue";
 
-    private controls: OrbitControls;
+export default class Main {
+    private element!: HTMLElement;
+    private loadingManager?: THREE.LoadingManager;
 
+    private scene!: THREE.Scene;
+    private renderer!: THREE.WebGLRenderer;
+    private camera!: THREE.PerspectiveCamera;
+
+    private controls!: OrbitControls;
+    private loader!: GLTFLoader;
     private clock: THREE.Clock;
-    private loader: GLTFLoader;
 
-    private model!: Model;
     private animation!: Animation;
-    private animQueue!: AnimationQueue;
 
-    private container: HTMLElement;
+    constructor(htmlelement: HTMLElement, loadingManager?: THREE.LoadingManager) {
+        this.element = htmlelement;
+        this.loadingManager = loadingManager;
+        this.clock = new THREE.Clock();
 
-    constructor(container?: HTMLElement, loadingManager?: THREE.LoadingManager) {
+        this.init();
+    }
+
+    private async init() {
         this.scene = new THREE.Scene();
 
         this.camera = new THREE.PerspectiveCamera(
-            75,
-            window.innerWidth / window.innerHeight,
-            0.1,
-            1000
+            75,                                                     // fov
+            this.element.clientWidth / this.element.clientHeight,   // aspect
+            0.1, 1000                                               // near, far
         );
 
-
-        this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-
-        this.container = container ?? document.body;
-        this.container.appendChild(this.renderer.domElement);
+        this.renderer = new THREE.WebGLRenderer({
+            antialias: true,
+            alpha: true
+        });
+        this.renderer.setSize(
+            this.element.clientWidth,
+            this.element.clientHeight
+        );
+        this.element.appendChild(this.renderer.domElement);
 
         const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
         this.scene.add(ambientLight);
@@ -48,60 +57,53 @@ export class Main {
         directionalLight.position.set(5, 5, 5);
         this.scene.add(directionalLight);
 
-            this.controls = new OrbitControls(this.camera, this.container);
-            this.controls.minPolarAngle = Math.PI / 2;
-            this.controls.maxPolarAngle = Math.PI / 2;
-            this.controls.enableZoom = false;
-            this.controls.enablePan = false;
+        this.controls = new OrbitControls(this.camera, this.element);
+        this.controls.minPolarAngle = Math.PI / 2;
+        this.controls.maxPolarAngle = Math.PI / 2;
+        this.controls.enableZoom = false;
+        this.controls.enablePan = false;
 
-            this.renderer.domElement.style.touchAction = 'pan-y';
+        this.renderer.domElement.style.touchAction = 'pan-y';
 
-        this.clock = new THREE.Clock();
+        this.loader = new GLTFLoader(this.loadingManager);
 
-        this.loader = new GLTFLoader(loadingManager);
+        window.addEventListener("resize", () => {
+            const WIDTH = window.innerWidth;
+            const HEIGHT = window.innerHeight;
 
-        window.addEventListener("resize", this.handleResize);
+            this.camera.aspect = WIDTH / HEIGHT;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(WIDTH, HEIGHT);
+        });
 
-        this.main();
+        const MODEL = await (new Model(this.loader)).init(assets.model, this.scene);
+
+        const CAMERA = new Camera(this.camera, MODEL);
+        CAMERA.centerCamera((_box: any, size: any, center: any) => {
+            MODEL.position.sub(center);
+            MODEL.position.y -= size.y * 0.3;
+        });
+        CAMERA.positionCamera();
+
+        // Animation
+        this.animation = new Animation(MODEL, this.loader, assets.idle_animation);
+
+        const ANIMATION_QUEUE = new AnimationQueue(this.animation);
+        ANIMATION_QUEUE.onqueue(await this.animation.loadAnimation(assets.welcome_animation));
+        ANIMATION_QUEUE.startRandom();
 
         this.animate();
     }
 
-    private async main() {
-        // Model
-        this.model = new Model(this.loader);
-        const baseModel = await this.model.init(`models/BASEmodel.glb`, this.scene);
-
-        // camera
-        const cameraBaseModel = new Camera(this.camera, baseModel);
-        cameraBaseModel.centerCamera((box, size, center) => {
-            baseModel.position.sub(center);
-            baseModel.position.y -= size.y * 0.3;
-        });
-        cameraBaseModel.positionCamera();
-
-        // Animation
-        this.animation = new Animation(baseModel, this.loader, 'animations/idle.glb');
-        this.animQueue = new AnimationQueue(this.animation);
-
-        // run animations
-        const wavingAction = await this.animation.loadAnimation('animations/waving.glb');
-        this.animQueue.onqueue(wavingAction);
-        this.animQueue.startRandom();
-    }
-
+    // animate must be an arrow key so that "this" 
+    // can be pointed to the Main instance
     private animate = () => {
         requestAnimationFrame(this.animate);
 
         const delta = this.clock.getDelta();
         if (this.animation) this.animation.update(delta);
+
         this.controls.update();
         this.renderer.render(this.scene, this.camera);
-    }
-
-    private handleResize = () => {
-        this.camera.aspect = window.innerWidth / window.innerHeight;
-        this.camera.updateProjectionMatrix();
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
     }
 }

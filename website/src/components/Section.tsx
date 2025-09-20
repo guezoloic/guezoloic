@@ -8,7 +8,7 @@ const Section: React.FC<{ children: JSX.Element, title: string, id: string }> = 
         >
             <h2
                 className="text-3xl sm:text-5xl font-extrabold bg-clip-text text-transparent 
-                            bg-gradient-to-r from-green-200 via-green-400 via-green-500 via-emerald-600 to-green-800"
+                            bg-gradient-to-r from-green-200 via-emerald-600 to-green-800"
             >
                 {title}
             </h2>

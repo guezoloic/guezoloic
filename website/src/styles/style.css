@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 * {
-    background-color: #1e3d2e;
     scrollbar-width: thin;
     scrollbar-color: #2f5643 #1e3d2e;
 }
@@ -11,6 +10,7 @@ body {
     height: 100dvh;
     margin: 0;
     padding: 0;
+    background-color: #1e3d2e;
 }
 
 ::-webkit-scrollbar {

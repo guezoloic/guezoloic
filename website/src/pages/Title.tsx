@@ -14,7 +14,7 @@ export default function Title() {
       viewport={{ amount: 0.2, once: false }}
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
-      <div className="absolute top-6 bg-transparent flex flex-col px-4 md:px-12 pt-6 md:pt-5 max-w-5xl justify-start flex flex-row justify-between items-center gap-15">
+      <div className="absolute top-6 bg-transparent px-4 md:px-12 pt-6 md:pt-5 max-w-5xl flex flex-row justify-between items-center gap-15">
 
         <motion.div
           className="text-x2l md:text-3xl font-bold text-white leading-tight"
@@ -23,7 +23,7 @@ export default function Title() {
           viewport={{ once: false, amount: 0.5 }}
           transition={{ duration: 0.3 }}
         >
-          <h3>{t(content.career)}</h3>
+          <h3>{t("me.title")}</h3>
           <p className="text-sm font-medium text-gray-400">{content.name}</p>
         </motion.div>
 

@@ -10,13 +10,13 @@ type ButtonProps = {
 export default function Button({ children, onClick, label, variant = "icon" }: ButtonProps) {
     const BASECLASS = "cursor-pointer flex items-center justify-center backdrop-blur-lg         \
                         bg-black/30 shadow-md text-white transition-all duration-200 ease-out   \
-                        hover:scale-110 hover:bg-white/25 active:scale-95 active:shadow-md";
+                        hover:bg-white/25 active:scale-95 active:shadow-md";
 
 
     // dictionary to choose if it's a icon or text button
     const variants: Record<typeof variant, string> = {
-        icon: "rounded-full w-12 h-12 md:w-14 md:h-14",
-        text: "rounded-3xl px-4 h-12 md:h-14 md:px-6 max-w-max",
+        icon: "rounded-full w-12 h-12 md:w-14 md:h-14 hover:scale-110",
+        text: "rounded-3xl px-4 h-12 md:h-14 md:px-6 max-w-max hover:scale-105",
     };
 
     return (

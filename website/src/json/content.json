@@ -1,5 +1,29 @@
 {
     "name": "GUEZO Loïc",
-    "career": "me.title",
-    "profile_image": "guezoloic.png"
+    "career": "me.career",
+    "profile_image": "guezoloic.png",
+    "navbar": {
+        "buttons": [
+            {
+                "label": "About",
+                "icon": "",
+                "action": "openAbout"
+            },
+            {
+                "label": "Skills",
+                "icon": "CodeBracketIcon",
+                "action": "openSkills"
+            },
+            {
+                "label": "Projects",
+                "icon": "FolderIcon",
+                "action": "openProjects"
+            },
+            {
+                "label": "Test",
+                "icon": "HomeIcon",
+                "action": "openTest"
+            }
+        ]
+    }
 }

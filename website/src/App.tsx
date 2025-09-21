@@ -2,12 +2,12 @@ import Title from "./pages/Title";
 import Three from "./pages/Three";
 import Navbar from "./pages/Navbar";
 import About from "./pages/About";
+import Skills from "./pages/Skills";
 
-import Window from "./components/Window";
-
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import './utils/translation';
+import Projects from "./pages/Projects";
 
 export type MenuState = {
     about: boolean;
@@ -22,12 +22,18 @@ export default function App() {
         projects: false,
     });
 
+    const closeSection = (key: keyof MenuState) => {
+        setState(prev => ({ ...prev, [key]: false }));
+    };
+
     return (
         <div className="relative w-full h-screen">
             <Three />
             <Title />
             <Navbar state={state} setState={setState} />
-            <Window open={state.about} onClose={() => setState(prev => ({...prev, about: false}))}> <About id="about" /></Window>
+            <About id="about" open={state.about} onClose={() => closeSection("about")} />
+            <Skills id="skills" open={state.skills} onClose={() => closeSection("skills")} />
+            <Projects id="projects" open={state.projects} onClose={() => closeSection("projects")} />
         </div>
     );
 }

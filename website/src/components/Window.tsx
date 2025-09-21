@@ -7,7 +7,7 @@ interface SectionProps {
   children: ReactNode;
 }
 
-const Window: React.FC<SectionProps> = ({ open, onClose, children }) => {
+export default function Window ({ open, onClose, children }: SectionProps) {
   return (
     <AnimatePresence>
       {open && (
@@ -36,5 +36,3 @@ const Window: React.FC<SectionProps> = ({ open, onClose, children }) => {
     </AnimatePresence>
   );
 };
-
-export default Window;

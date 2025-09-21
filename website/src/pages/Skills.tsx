@@ -1,0 +1,51 @@
+import React from "react";
+import { motion } from "framer-motion";
+import * as SiIcons from "react-icons/si";
+import Section from "../components/Section";
+import { useTranslation } from "react-i18next";
+
+import content from "../json/content.json"
+import Window from "../components/Window";
+
+type SkillsProps = {
+    id: string;
+    open: boolean;
+    onClose: () => void;
+};
+
+export default function Skills({ id, open, onClose }: SkillsProps) {
+    const { t } = useTranslation();
+
+    const skillsData = content.skills;
+    return (
+        <Window open={open} onClose={onClose}>
+            <Section id={id} title={t("skills.title")}>
+                <div className="flex flex-col gap-4 w-full">
+                    {skillsData.map((section, i) => (
+                        <div key={i} className="flex flex-col gap-2">
+                            <h3 className="text-xl font-semibold text-white">{t(section.title)}</h3>
+                            <div className="flex flex-wrap gap-3">
+                                {section.tags.map((tag, j) => {
+                                    const Icon = (SiIcons as Record<string, React.ElementType>)[tag.icon];
+                                    return (
+                                        <motion.div
+                                            key={j}
+                                            className="flex items-center gap-2 p-2 rounded-xl hover:bg-black/40 transition-colors"
+                                            initial={{ opacity: 0, y: 15 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: false, amount: 0 }}
+                                            transition={{ duration: 0.5, delay: j * 0.08 }}
+                                        >
+                                            {Icon && <Icon className="w-5 h-5 text-emerald-400 mt-1" />}
+                                            <span className="text-sm md:text-base">{tag.name}</span>
+                                        </motion.div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </Section>
+        </Window>
+    );
+};

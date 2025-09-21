@@ -1,6 +1,12 @@
 import React, { JSX } from "react";
 
-const Section: React.FC<{ children: JSX.Element, title: string, id: string }> = ({ children, title, id }) => {
+type SectionProps = { 
+    children: JSX.Element; 
+    title: string; 
+    id: string 
+};
+
+export default function Section({ children, title, id }: SectionProps) {
     return (
         <section
             id={id}
@@ -16,5 +22,3 @@ const Section: React.FC<{ children: JSX.Element, title: string, id: string }> = 
         </section>
     );
 };
-
-export default Section;

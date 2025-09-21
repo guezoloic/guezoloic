@@ -1,6 +1,9 @@
 import Title from "./pages/Title";
 import Three from "./pages/Three";
 import Navbar from "./pages/Navbar";
+import About from "./pages/About";
+
+import Window from "./components/Window";
 
 import { useEffect, useState } from "react";
 
@@ -19,18 +22,11 @@ export default function App() {
         projects: false,
     });
 
-    useEffect(() => {
-        if (state.about) {
-            alert("Home est activé !");
-            setState(prev => ({...prev, about: false}));
-        }
-    }, [state.about]);
-
-
     return (
         <div className="relative w-full h-screen">
             <Three />
             <Title />
+            <Window open={state.about} onClose={() => setState(prev => ({...prev, about: false}))}> <About id="about" /></Window>
             <Navbar state={state} setState={setState} />
         </div>
     );

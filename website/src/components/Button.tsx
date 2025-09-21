@@ -9,7 +9,7 @@ type ButtonProps = {
 
 export default function Button({ children, onClick, label, variant = "icon" }: ButtonProps) {
     const BASECLASS = "cursor-pointer flex items-center justify-center backdrop-blur-sm         \
-                        bg-black/15 shadow-md text-white transition-all duration-200 ease-out   \
+                        bg-black/17 shadow-md text-white transition-all duration-200 ease-out   \
                         hover:bg-white/15 active:scale-95 shadow-lg shadow-black/50";
 
 

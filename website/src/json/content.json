@@ -5,24 +5,19 @@
     "navbar": {
         "buttons": [
             {
-                "label": "About",
-                "icon": "",
-                "action": "openAbout"
+                "label": "about.label",
+                "action": "about",
+                "icon": ""
             },
             {
-                "label": "Skills",
-                "icon": "CodeBracketIcon",
-                "action": "openSkills"
+                "label": "skills.label",
+                "action": "skills",
+                "icon": "CodeBracketIcon"
             },
             {
-                "label": "Projects",
-                "icon": "FolderIcon",
-                "action": "openProjects"
-            },
-            {
-                "label": "Test",
-                "icon": "HomeIcon",
-                "action": "openTest"
+                "label": "projects.label",
+                "action": "projects",
+                "icon": "ServerIcon"
             }
         ]
     }

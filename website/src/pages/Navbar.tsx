@@ -3,32 +3,33 @@ import { useTranslation } from "react-i18next";
 import Button from "../components/Button";
 
 import content from "../json/content.json";
-import { HomeIcon, CodeBracketIcon, FolderIcon } from "@heroicons/react/24/solid";
+import * as SOLID from "@heroicons/react/24/solid";
 
-
-const iconMap: Record<string, React.ElementType> = {
-    HomeIcon,
-    CodeBracketIcon,
-    FolderIcon
-};
+import { Dispatch, SetStateAction } from "react";
+import { MenuState } from "../App";
 
 type NavbarProps = {
-    buttons: Record<string, () => void>;
+    state: MenuState;
+    setState: Dispatch<SetStateAction<MenuState>>;
 };
 
-export default function Navbar({ buttons }: NavbarProps) {
+export default function Navbar({ state, setState }: NavbarProps) {
     const { t } = useTranslation();
-    const buttonsData = content.navbar.buttons;
+
+    const handleClick = (key: keyof MenuState) => {
+        setState(prev => ({ ...prev, [key]: true }));
+    };
 
     const mainButton = content.navbar.buttons[0];
-    const mainOnClick = buttons[mainButton.action];
 
     return (
-        <motion.nav className=" fixed bottom-4 left-1/2 transform
-                                -translate-x-1/2 flex 
-                                items-center gap-2 z-100 rounded-full">
+        <motion.nav className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex items-center gap-2 z-100 rounded-full">
             <div className="flex items-center gap-3">
-                <Button onClick={mainOnClick} label={mainButton.label} variant="text">
+                <Button
+                    onClick={() => handleClick(mainButton.action as keyof MenuState)}
+                    label={t(mainButton.label)}
+                    variant="text"
+                >
                     <div className="flex flex-col items-center justify-center whitespace-nowrap">
                         <span className="text-base md:text-lg font-bold text-white drop-shadow-lg">
                             {content.name}
@@ -41,17 +42,20 @@ export default function Navbar({ buttons }: NavbarProps) {
             </div>
 
             <div className="flex items-center gap-2">
-                {buttonsData.slice(1).map((btn, i) => {
-                    const Icon = iconMap[btn.icon];
-                    const onClick = buttons[btn.action]
-
+                {content.navbar.buttons.slice(1).map((btn, i) => {
+                    const Icon = (SOLID as Record<string, React.ElementType>)[btn.icon];
                     return (
-                        <Button key={i} onClick={onClick} label={btn.label} variant="icon">
-                            <Icon className="w-6 h-6 text-white" />
+                        <Button
+                            key={i}
+                            onClick={() => handleClick(btn.action as keyof MenuState)}
+                            label={t(btn.label)}
+                            variant="icon"
+                        >
+                            {Icon && <Icon className="w-6 h-6 text-white" />}
                         </Button>
                     );
                 })}
             </div>
-        </motion.nav >
-    )
+        </motion.nav>
+    );
 }

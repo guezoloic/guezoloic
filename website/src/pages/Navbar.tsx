@@ -8,6 +8,7 @@ import * as SOLID from "@heroicons/react/24/solid";
 
 import { Dispatch, SetStateAction } from "react";
 import { MenuState } from "../App";
+import i18n from "../utils/translation";
 
 type NavbarProps = {
     state: MenuState;
@@ -27,6 +28,13 @@ const exitVariants: Variants = {
 
 export default function Navbar({ state, setState }: NavbarProps) {
     const { t } = useTranslation();
+
+    const toggleLanguage = () => {
+        const newLang = i18n.language === "fr" ? "en" : "fr";
+        i18n.changeLanguage(newLang);
+    };
+
+    const nextLangLabel = i18n.language === "fr" ? "EN" : "FR";
 
     const handleClick = (key: keyof MenuState) => {
         setState(prev => ({ ...prev, [key]: true }));
@@ -104,6 +112,14 @@ export default function Navbar({ state, setState }: NavbarProps) {
 
                         );
                     })}
+                    
+                    <Button
+                        onClick={toggleLanguage}
+                        label={`Lang: ${nextLangLabel}`}
+                        variant="icon"
+                    >
+                        {nextLangLabel}
+                    </Button>
                 </motion.div>
             )}
         </AnimatePresence>

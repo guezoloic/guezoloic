@@ -26,8 +26,8 @@ export default function App() {
         <div className="relative w-full h-screen">
             <Three />
             <Title />
-            <Window open={state.about} onClose={() => setState(prev => ({...prev, about: false}))}> <About id="about" /></Window>
             <Navbar state={state} setState={setState} />
+            <Window open={state.about} onClose={() => setState(prev => ({...prev, about: false}))}> <About id="about" /></Window>
         </div>
     );
 }

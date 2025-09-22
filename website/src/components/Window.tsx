@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface SectionProps {
@@ -8,6 +8,11 @@ interface SectionProps {
 }
 
 export default function Window ({ open, onClose, children }: SectionProps) {
+   useEffect(() => {
+    if (open) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+  }, [open]);
+
   return (
     <AnimatePresence>
       {open && (

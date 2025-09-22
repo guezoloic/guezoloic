@@ -7,26 +7,23 @@
         "label": "À propos",
         "title": "Bonjour, je suis Loïc ! 👋",
         "content": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
+            "Curieux de nature, j'aime explorer ce qui se passe sous toutes les couches d'un système informatique.",
+            "J'ai commencé par de simples programmes en Python, puis j'ai progressivement découvert une fascination pour le bas niveau.",
+            "En apprenant les bases de l'assembleur Intel x86_64 en licence et en touchant à l'électronique, j'ai compris que j'adore apprendre et concevoir à un niveau fondamental.",
+            "Au fil du temps, je me suis rapproché de la programmation bas niveau et réalisé quelques petits projets.",
+            "Ces projets m'ont permis de manipuler et d'expérimenter le fonctionnement de différents matériels.",
+            "Je m'intéresse aussi à des projets variés, comme créer une petite IA ou un moteur graphique sur terminal.",
+            "Les outils informatique et matériels m'ont donné une vision complète des systèmes embarqués et je souhaite continuer à apprendre dans cette voie.",
+            "Je cherche à combiner logiciel et matériel pour concevoir des systèmes complexes et efficaces."
         ]
     },
     "skills": {
         "label": "Compétences",
         "title": "Mes Compétences",
         "content": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
+            "Langages Informatique",
+            "Outils",
+            "Matériel & Systèmes embarqués"
         ]
     },
     "projects": {

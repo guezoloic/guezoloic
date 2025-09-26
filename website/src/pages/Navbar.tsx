@@ -1,14 +1,12 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import Button from "../components/Button";
-
-import content from "../json/content.json";
 import * as SOLID from "@heroicons/react/24/solid";
 
-import { Dispatch, SetStateAction } from "react";
+import Button from "../components/Button";
+import content from "../json/content.json";
 import { MenuState } from "../App";
-import i18n from "../utils/translation";
+import Lang from "../components/Lang"
 
 type NavbarProps = {
     state: MenuState;
@@ -29,12 +27,6 @@ const exitVariants: Variants = {
 export default function Navbar({ state, setState }: NavbarProps) {
     const { t } = useTranslation();
 
-    const toggleLanguage = () => {
-        const newLang = i18n.language === "fr" ? "en" : "fr";
-        i18n.changeLanguage(newLang);
-    };
-
-    const nextLangLabel = i18n.language === "fr" ? "EN" : "FR";
 
     const handleClick = (key: keyof MenuState) => {
         setState(prev => ({ ...prev, [key]: true }));
@@ -112,14 +104,7 @@ export default function Navbar({ state, setState }: NavbarProps) {
 
                         );
                     })}
-                    
-                    <Button
-                        onClick={toggleLanguage}
-                        label={`Lang: ${nextLangLabel}`}
-                        variant="icon"
-                    >
-                        {nextLangLabel}
-                    </Button>
+                    <Lang />
                 </motion.div>
             )}
         </AnimatePresence>

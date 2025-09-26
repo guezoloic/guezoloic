@@ -103,10 +103,6 @@
                 {
                     "name": "Android Studio",
                     "icon": "SiAndroid"
-                },
-                {
-                    "name": "OpenCV",
-                    "icon": "SiOpencv"
                 }
             ]
         },
@@ -114,12 +110,8 @@
             "title": "skills.content.2",
             "tags": [
                 {
-                    "name": "Linux",
+                    "name": "Linux/Linux Server",
                     "icon": "SiLinux"
-                },
-                {
-                    "name": "Ubuntu Server",
-                    "icon": "SiUbuntu"
                 },
                 {
                     "name": "Proxmox",
@@ -132,6 +124,10 @@
                 {
                     "name": "Raspberry Pi",
                     "icon": "SiRaspberrypi"
+                },
+                {
+                    "name": "Arduino",
+                    "icon": "SiArduino"
                 },
                 {
                     "name": "ESP32",

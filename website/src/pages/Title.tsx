@@ -24,7 +24,7 @@ export default function Title() {
           transition={{ duration: 0.3 }}
         >
           <h3>{t("me.title")}</h3>
-          <p className="text-sm font-medium text-gray-400">{content.name}</p>
+          <p className="text-sm font-medium text-gray-400">{t("me.subTitle")}</p>
         </motion.div>
 
         <motion.div

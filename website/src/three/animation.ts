@@ -26,7 +26,7 @@ export default class Animation {
     }
 
     public loadAnimation(url: string): Promise<THREE.AnimationAction> {
-        url = `assets/${url}`;
+        url = `https://guezoloic.com/data/${url}`;
         return new Promise((resolve, reject) => {
             if (this.actions.has(url)) return resolve(this.actions.get(url)!);
             this.loader.load(

@@ -9,7 +9,7 @@ export default class Model {
     }
 
     public async init(model_url: string, scene: THREE.Scene, isVisible: boolean = true): Promise<THREE.Object3D> {
-        const MODEL = await this.loadModel(`assets/${model_url}`);
+        const MODEL = await this.loadModel(`https://guezoloic.com/data/${model_url}`);
         MODEL.visible = isVisible;
         scene.add(MODEL);
         return MODEL;

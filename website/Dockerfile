@@ -11,5 +11,7 @@ FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+VOLUME /usr/share/nginx/html/public
+
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

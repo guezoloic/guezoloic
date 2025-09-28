@@ -26,11 +26,13 @@ export default function App() {
         setState(prev => ({ ...prev, [key]: false }));
     };
 
+    const isOpen = Object.values(state).some(value => value === true);
+
     return (
         <div className="relative w-full h-screen">
             <Three />
-            <Title />
-            <Navbar state={state} setState={setState} />
+            <Title isOpen={isOpen}/>
+            <Navbar state={state} setState={setState} isOpen={isOpen} />
             <About id="about" open={state.about} onClose={() => closeSection("about")} />
             <Skills id="skills" open={state.skills} onClose={() => closeSection("skills")} />
             <Projects id="projects" open={state.projects} onClose={() => closeSection("projects")} />

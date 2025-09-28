@@ -11,6 +11,7 @@ import Lang from "../components/Lang"
 type NavbarProps = {
     state: MenuState;
     setState: Dispatch<SetStateAction<MenuState>>;
+    isOpen: boolean;
 };
 
 const navVariants: Variants = {
@@ -24,7 +25,7 @@ const exitVariants: Variants = {
 };
 
 
-export default function Navbar({ state, setState }: NavbarProps) {
+export default function Navbar({ state, setState, isOpen }: NavbarProps) {
     const { t } = useTranslation();
 
 
@@ -40,7 +41,6 @@ export default function Navbar({ state, setState }: NavbarProps) {
         });
     };
 
-    const isOpen = Object.values(state).some(value => value === true);
     const mainButton = content.navbar.buttons[0];
 
     return (

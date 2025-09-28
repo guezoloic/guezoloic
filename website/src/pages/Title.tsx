@@ -3,12 +3,13 @@ import { useTranslation } from "react-i18next";
 
 import content from "../json/content.json"
 
-export default function Title() {
+export default function Title({isOpen}: {isOpen: boolean}) {
   const { t } = useTranslation();
 
   return (
     <motion.section
-      className="flex items-center justify-center"
+      className="flex items-center justify-center"  
+      style={isOpen ? { overflow: "hidden" } : undefined}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ amount: 0.2, once: false }}

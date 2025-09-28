@@ -23,7 +23,8 @@ export default function Skills({ id, open, onClose }: SkillsProps) {
                 {skillsData.map((section, i) => (
                     <div key={i} className="flex flex-col gap-2">
                         <div className="flex flex-col gap-2 max-w-3xl w-full bg-black/20 rounded-2xl p-8 space-y-4 shadow-lg">
-                            <h2 className="text-xl font-semibold text-white">{t(section.title)}:</h2>
+                            <h2 className="text-xl font-semibold font-extrabold bg-clip-text text-transparent 
+                            bg-gradient-to-r from-green-200 via-emerald-600 to-green-800">{t(section.title)}:</h2>
                             <div className="flex flex-wrap gap-2">
                                 {section.tags.map((tag, j) => {
                                     const Icon = (SiIcons as Record<string, React.ElementType>)[tag.icon];

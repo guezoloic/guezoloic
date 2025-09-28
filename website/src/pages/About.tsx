@@ -20,7 +20,7 @@ export default function About({ id, open, onClose }: AboutProps) {
 
     return (
         <Window open={open} onClose={onClose}>
-            <div className="flex justify-center items-center h-full w-full px-6">
+            <div className="flex justify-center items-center h-full w-full md:px-6">
                 <div className="max-w-3xl w-full bg-black/21 rounded-2xl p-8 space-y-4 shadow-lg">
                     <Section id={id} title={t('about.title')}>
                         <div className="flex flex-col gap-1">
